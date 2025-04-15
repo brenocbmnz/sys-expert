@@ -1,4 +1,3 @@
-
 const knowledgeBase = {
     hardware: {
         motherboard: {
@@ -643,7 +642,7 @@ const knowledgeBase = {
                 solution: [
                     "Limpe o interior do gabinete e os coolers para remover poeira acumulada.",
                     "Verifique se todos os coolers estão funcionando corretamente.",
-                    "Aplique nova pasta térmica no processador e placa de vídeo se necessário.",
+                    "Aplique nova pasta térmica no processador e cooler se necessário.",
                     "Melhore a ventilação do ambiente onde o computador está instalado.",
                     "Considere adicionar mais coolers ou um sistema de refrigeração mais eficiente."
                 ]
@@ -1570,7 +1569,6 @@ function handleQuickLinks(e) {
             break;
     }
 
-
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.innerHTML = `
@@ -1584,65 +1582,18 @@ function handleQuickLinks(e) {
 
     document.body.appendChild(modal);
 
-
-    if (!document.getElementById("modal-style")) {
-        const style = document.createElement("style");
-        style.id = "modal-style";
-        style.textContent = `
-            .modal {
-                display: block;
-                position: fixed;
-                z-index: 1000;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-            }
-            
-            .modal-content {
-                background-color: white;
-                margin: 10% auto;
-                padding: 20px;
-                border-radius: 8px;
-                width: 80%;
-                max-width: 700px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-                animation: modalFadeIn 0.3s;
-            }
-            
-            .close-modal {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-            
-            .close-modal:hover {
-                color: black;
-            }
-            
-            .modal-body {
-                padding: 15px 0;
-            }
-            
-            @keyframes modalFadeIn {
-                from { opacity: 0; transform: translateY(-50px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-
     modal.querySelector(".close-modal").addEventListener("click", function () {
         document.body.removeChild(modal);
     });
 
-
     modal.addEventListener("click", function (event) {
         if (event.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && document.querySelector(".modal")) {
             document.body.removeChild(modal);
         }
     });
