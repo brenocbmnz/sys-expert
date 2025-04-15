@@ -637,7 +637,7 @@ const knowledgeBase = {
             }
         },
         temperatura: {
-            "alta": {
+            "Temperatura Alta": {
                 diagnose: "O computador está operando em temperaturas elevadas.",
                 solution: [
                     "Limpe o interior do gabinete e os coolers para remover poeira acumulada.",
@@ -1110,7 +1110,6 @@ const toolsBase = {
 };
 
 
-// Função para realizar diagnóstico
 function diagnose() {
     try {
         const category = document.getElementById("problem-category")?.value;
@@ -1118,13 +1117,11 @@ function diagnose() {
         const symptom = document.getElementById("symptoms")?.value;
         const additionalInfo = document.getElementById("additional-info")?.value || "";
         
-        // Validar seleções
         if (!category || !subcategory || !symptom) {
             alert("Por favor, preencha todos os campos necessários para o diagnóstico.");
             return;
         }
         
-        // Verificar se a base de conhecimento tem os dados necessários
         if (!knowledgeBase[category]) {
             console.error(`Categoria '${category}' não encontrada na base de conhecimento.`);
             alert("Erro: Categoria não encontrada na base de conhecimento.");
@@ -1145,7 +1142,6 @@ function diagnose() {
         
         const result = knowledgeBase[category][subcategory][symptom];
         
-        // Obter ou criar os elementos necessários para exibir o resultado
         let resultContainer = document.getElementById("result");
         if (!resultContainer) {
             console.log("Criando container de resultado que não existe");
@@ -1168,12 +1164,10 @@ function diagnose() {
             resultContainer.appendChild(diagnosisText);
             resultContainer.appendChild(solutionSteps);
             
-            // Encontrar onde inserir o resultado
             const diagnosticTab = document.getElementById("diagnostic-tab");
             if (diagnosticTab) {
                 diagnosticTab.appendChild(resultContainer);
             } else {
-                // Fallback se não encontrar a aba de diagnóstico
                 const diagnosticPanel = document.querySelector(".diagnostic-panel");
                 if (diagnosticPanel) {
                     diagnosticPanel.appendChild(resultContainer);
@@ -1201,10 +1195,8 @@ function diagnose() {
             resultContainer.appendChild(solutionStepsElement);
         }
         
-        // Exibir o diagnóstico
         diagnosisTextElement.textContent = result.diagnose;
         
-        // Mostrar soluções passo a passo
         solutionStepsElement.innerHTML = "<h3>Passos para Solução:</h3>";
         
         result.solution.forEach((step, index) => {
@@ -1217,10 +1209,8 @@ function diagnose() {
             solutionStepsElement.appendChild(stepDiv);
         });
         
-        // Mostrar resultado
         resultContainer.classList.remove("hidden");
         
-        // Adicionar ao histórico
         try {
             addToHistory(category, subcategory, symptom);
         } catch (historyError) {
@@ -1440,8 +1430,8 @@ function handleQuickLinks(e) {
                 </ul>
             `;
             break;
-
-        case "rede-guide":
+            
+        case "network-guide":
             content = `
                 <h3>Guia Rápido de Redes</h3>
                 <p>Instruções para diagnóstico e solução de problemas comuns de rede.</p>
@@ -1638,16 +1628,13 @@ function updateKnowledgeSubcategories() {
 }
 
 
-// Função para atualizar subcategorias com base na categoria selecionada
 function updateSubcategories() {
     const category = document.getElementById("problem-category").value;
     const subcategorySelect = document.getElementById("problem-subcategory");
     
-    // Limpar opções atuais
     subcategorySelect.innerHTML = "";
     subcategorySelect.disabled = true;
     
-    // Resetar sintomas
     document.getElementById("symptoms").innerHTML = "";
     document.getElementById("symptoms").disabled = true;
     
@@ -1656,13 +1643,11 @@ function updateSubcategories() {
         return;
     }
     
-    // Adicionar nova opção padrão
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Selecione um tipo de problema";
     subcategorySelect.appendChild(defaultOption);
     
-    // Adicionar subcategorias com base na categoria selecionada
     if (knowledgeBase[category]) {
         const subcategories = Object.keys(knowledgeBase[category]);
         
@@ -1670,7 +1655,6 @@ function updateSubcategories() {
             const option = document.createElement("option");
             option.value = subcategory;
             
-            // Formatar nome da subcategoria para exibição
             let displayName = subcategory;
             switch(subcategory) {
                 case "motherboard": displayName = "Placa-mãe"; break;
@@ -1708,13 +1692,11 @@ function updateSubcategories() {
 }
 
 
-// Função para atualizar sintomas com base na subcategoria selecionada
 function updateSymptoms() {
     const category = document.getElementById("problem-category").value;
     const subcategory = document.getElementById("problem-subcategory").value;
     const symptomsSelect = document.getElementById("symptoms");
     
-    // Limpar opções atuais
     symptomsSelect.innerHTML = "";
     symptomsSelect.disabled = true;
     
@@ -1723,13 +1705,11 @@ function updateSymptoms() {
         return;
     }
     
-    // Adicionar nova opção padrão
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Selecione os sintomas específicos";
     symptomsSelect.appendChild(defaultOption);
     
-    // Adicionar sintomas com base na subcategoria selecionada
     if (knowledgeBase[category] && knowledgeBase[category][subcategory]) {
         const symptoms = Object.keys(knowledgeBase[category][subcategory]);
         
@@ -2172,9 +2152,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// Função para detectar sistema operacional, navegador e resolução
 function detectSystemInfo() {
-    // Detectar Sistema Operacional
     let osInfo = "Desconhecido";
     const userAgent = navigator.userAgent;
     
@@ -2192,7 +2170,6 @@ function detectSystemInfo() {
         osInfoElement.textContent = osInfo;
     }
     
-    // Detectar Navegador
     let browserInfo = "Desconhecido";
     
     if (userAgent.indexOf("Chrome") !== -1 && userAgent.indexOf("Edg") === -1 && userAgent.indexOf("OPR") === -1) 
@@ -2213,7 +2190,6 @@ function detectSystemInfo() {
         browserInfoElement.textContent = browserInfo;
     }
     
-    // Detectar Resolução
     const width = window.screen.width;
     const height = window.screen.height;
     
