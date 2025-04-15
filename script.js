@@ -423,7 +423,7 @@ const knowledgeBase = {
             }
         }
     },
-    network: {
+    rede: {
         conexao: {
             "instabilidade": {
                 diagnose: "A conexão de rede está instável, com quedas frequentes.",
@@ -1110,186 +1110,103 @@ const toolsBase = {
 };
 
 
-function detectSystemInfo() {
-
-    let osInfo = "Desconhecido";
-    const userAgent = navigator.userAgent;
-
-    if (userAgent.indexOf("Windows NT 10.0") !== -1) osInfo = "Windows 10";
-    else if (userAgent.indexOf("Windows NT 6.3") !== -1) osInfo = "Windows 8.1";
-    else if (userAgent.indexOf("Windows NT 6.2") !== -1) osInfo = "Windows 8";
-    else if (userAgent.indexOf("Windows NT 6.1") !== -1) osInfo = "Windows 7";
-    else if (userAgent.indexOf("Mac") !== -1) osInfo = "macOS";
-    else if (userAgent.indexOf("Linux") !== -1) osInfo = "Linux";
-    else if (userAgent.indexOf("Android") !== -1) osInfo = "Android";
-    else if (userAgent.indexOf("iOS") !== -1) osInfo = "iOS";
-
-    document.getElementById("os-info").textContent = osInfo;
-
-
-    let browserInfo = "Desconhecido";
-
-    if (userAgent.indexOf("Chrome") !== -1 && userAgent.indexOf("Edg") === -1 && userAgent.indexOf("OPR") === -1)
-        browserInfo = "Google Chrome";
-    else if (userAgent.indexOf("Firefox") !== -1)
-        browserInfo = "Mozilla Firefox";
-    else if (userAgent.indexOf("Edg") !== -1)
-        browserInfo = "Microsoft Edge";
-    else if (userAgent.indexOf("Safari") !== -1 && userAgent.indexOf("Chrome") === -1)
-        browserInfo = "Safari";
-    else if (userAgent.indexOf("OPR") !== -1)
-        browserInfo = "Opera";
-    else if (userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident") !== -1)
-        browserInfo = "Internet Explorer";
-
-    document.getElementById("browser-info").textContent = browserInfo;
-
-
-    const width = window.screen.width;
-    const height = window.screen.height;
-    document.getElementById("resolution-info").textContent = `${width}x${height}`;
-}
-
-
-function updateSubcategories() {
-    const category = document.getElementById("problem-category").value;
-    const subcategorySelect = document.getElementById("problem-subcategory");
-
-
-    subcategorySelect.innerHTML = "";
-    subcategorySelect.disabled = true;
-
-
-    document.getElementById("symptoms").innerHTML = "";
-    document.getElementById("symptoms").disabled = true;
-
-    if (!category) {
-        subcategorySelect.innerHTML = "<option value=''>Primeiro selecione uma categoria</option>";
-        return;
-    }
-
-
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "Selecione um tipo de problema";
-    subcategorySelect.appendChild(defaultOption);
-
-
-    if (knowledgeBase[category]) {
-        const subcategories = Object.keys(knowledgeBase[category]);
-
-        subcategories.forEach(subcategory => {
-            const option = document.createElement("option");
-            option.value = subcategory;
-
-
-            let displayName = subcategory;
-            switch (subcategory) {
-
-                case "motherboard": displayName = "Placa-mãe"; break;
-                case "cpu": displayName = "Processador"; break;
-                case "memoria": displayName = "Memória RAM"; break;
-                case "armazenamento": displayName = "Disco/Armazenamento"; break;
-                case "video": displayName = "Placa de Vídeo"; break;
-                case "audio": displayName = "Áudio"; break;
-
-
-                case "sistema": displayName = "Sistema Operacional"; break;
-                case "aplicativos": displayName = "Aplicativos/Programas"; break;
-                case "malware": displayName = "Vírus/Malware"; break;
-                case "drivers": displayName = "Drivers"; break;
-
-
-                case "conexao": displayName = "Conexão com Internet"; break;
-                case "wifi": displayName = "Rede Wi-Fi"; break;
-                case "ethernet": displayName = "Conexão Ethernet"; break;
-                case "compartilhamento": displayName = "Compartilhamento de Rede"; break;
-
-
-                case "lentidao": displayName = "Lentidão"; break;
-                case "temperatura": displayName = "Temperatura"; break;
-                case "consumo": displayName = "Consumo de Recursos"; break;
-
-
-                case "teclado": displayName = "Teclado"; break;
-                case "mouse": displayName = "Mouse"; break;
-                case "impressora": displayName = "Impressora"; break;
-                case "webcam": displayName = "Webcam"; break;
-
-
-                case "fonte": displayName = "Fonte de Alimentação"; break;
-                case "bateria": displayName = "Bateria"; break;
-                case "picos": displayName = "Problemas Elétricos"; break;
-            }
-
-            option.textContent = displayName;
-            subcategorySelect.appendChild(option);
-        });
-
-        subcategorySelect.disabled = false;
-    }
-}
-
-
-function updateSymptoms() {
-    const category = document.getElementById("problem-category").value;
-    const subcategory = document.getElementById("problem-subcategory").value;
-    const symptomsSelect = document.getElementById("symptoms");
-
-
-    symptomsSelect.innerHTML = "";
-    symptomsSelect.disabled = true;
-
-    if (!subcategory) {
-        symptomsSelect.innerHTML = "<option value=''>Primeiro selecione um tipo de problema</option>";
-        return;
-    }
-
-
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "Selecione os sintomas específicos";
-    symptomsSelect.appendChild(defaultOption);
-
-
-    if (knowledgeBase[category] && knowledgeBase[category][subcategory]) {
-        const symptoms = Object.keys(knowledgeBase[category][subcategory]);
-
-        symptoms.forEach(symptom => {
-            const option = document.createElement("option");
-            option.value = symptom;
-            option.textContent = symptom.charAt(0).toUpperCase() + symptom.slice(1);
-            symptomsSelect.appendChild(option);
-        });
-
-        symptomsSelect.disabled = false;
-    }
-}
-
-
+// Função para realizar diagnóstico
 function diagnose() {
-    const category = document.getElementById("problem-category").value;
-    const subcategory = document.getElementById("problem-subcategory").value;
-    const symptom = document.getElementById("symptoms").value;
-    const additionalInfo = document.getElementById("additional-info").value;
-
-
-    if (!category || !subcategory || !symptom) {
-        alert("Por favor, preencha todos os campos necessários para o diagnóstico.");
-        return;
-    }
-
-
-    const result = knowledgeBase[category][subcategory][symptom];
-
-    if (result) {
-
-        document.getElementById("diagnosis-text").textContent = result.diagnose;
-
-
-        const solutionSteps = document.getElementById("solution-steps");
-        solutionSteps.innerHTML = "<h3>Passos para Solução:</h3>";
-
+    try {
+        const category = document.getElementById("problem-category")?.value;
+        const subcategory = document.getElementById("problem-subcategory")?.value;
+        const symptom = document.getElementById("symptoms")?.value;
+        const additionalInfo = document.getElementById("additional-info")?.value || "";
+        
+        // Validar seleções
+        if (!category || !subcategory || !symptom) {
+            alert("Por favor, preencha todos os campos necessários para o diagnóstico.");
+            return;
+        }
+        
+        // Verificar se a base de conhecimento tem os dados necessários
+        if (!knowledgeBase[category]) {
+            console.error(`Categoria '${category}' não encontrada na base de conhecimento.`);
+            alert("Erro: Categoria não encontrada na base de conhecimento.");
+            return;
+        }
+        
+        if (!knowledgeBase[category][subcategory]) {
+            console.error(`Subcategoria '${subcategory}' não encontrada na categoria '${category}'.`);
+            alert("Erro: Tipo de problema não encontrado na base de conhecimento.");
+            return;
+        }
+        
+        if (!knowledgeBase[category][subcategory][symptom]) {
+            console.error(`Sintoma '${symptom}' não encontrado na subcategoria '${subcategory}'.`);
+            alert("Erro: Sintoma não encontrado na base de conhecimento.");
+            return;
+        }
+        
+        const result = knowledgeBase[category][subcategory][symptom];
+        
+        // Obter ou criar os elementos necessários para exibir o resultado
+        let resultContainer = document.getElementById("result");
+        if (!resultContainer) {
+            console.log("Criando container de resultado que não existe");
+            resultContainer = document.createElement("div");
+            resultContainer.id = "result";
+            resultContainer.className = "hidden";
+            
+            const resultTitle = document.createElement("div");
+            resultTitle.className = "result-title";
+            resultTitle.textContent = "Resultado do Diagnóstico:";
+            
+            const diagnosisText = document.createElement("div");
+            diagnosisText.id = "diagnosis-text";
+            
+            const solutionSteps = document.createElement("div");
+            solutionSteps.id = "solution-steps";
+            solutionSteps.className = "fade-in";
+            
+            resultContainer.appendChild(resultTitle);
+            resultContainer.appendChild(diagnosisText);
+            resultContainer.appendChild(solutionSteps);
+            
+            // Encontrar onde inserir o resultado
+            const diagnosticTab = document.getElementById("diagnostic-tab");
+            if (diagnosticTab) {
+                diagnosticTab.appendChild(resultContainer);
+            } else {
+                // Fallback se não encontrar a aba de diagnóstico
+                const diagnosticPanel = document.querySelector(".diagnostic-panel");
+                if (diagnosticPanel) {
+                    diagnosticPanel.appendChild(resultContainer);
+                } else {
+                    document.body.appendChild(resultContainer);
+                    console.warn("Adicionando resultado ao body porque não encontrou o local adequado");
+                }
+            }
+        }
+        
+        let diagnosisTextElement = document.getElementById("diagnosis-text");
+        if (!diagnosisTextElement) {
+            console.log("Criando elemento de texto de diagnóstico que não existe");
+            diagnosisTextElement = document.createElement("div");
+            diagnosisTextElement.id = "diagnosis-text";
+            resultContainer.appendChild(diagnosisTextElement);
+        }
+        
+        let solutionStepsElement = document.getElementById("solution-steps");
+        if (!solutionStepsElement) {
+            console.log("Criando elemento de passos de solução que não existe");
+            solutionStepsElement = document.createElement("div");
+            solutionStepsElement.id = "solution-steps";
+            solutionStepsElement.className = "fade-in";
+            resultContainer.appendChild(solutionStepsElement);
+        }
+        
+        // Exibir o diagnóstico
+        diagnosisTextElement.textContent = result.diagnose;
+        
+        // Mostrar soluções passo a passo
+        solutionStepsElement.innerHTML = "<h3>Passos para Solução:</h3>";
+        
         result.solution.forEach((step, index) => {
             const stepDiv = document.createElement("div");
             stepDiv.className = "solution-step";
@@ -1297,16 +1214,21 @@ function diagnose() {
                 <div class="solution-step-title">Passo ${index + 1}</div>
                 <div class="solution-step-content">${step}</div>
             `;
-            solutionSteps.appendChild(stepDiv);
+            solutionStepsElement.appendChild(stepDiv);
         });
-
-
-        document.getElementById("result").classList.remove("hidden");
-
-
-        addToHistory(category, subcategory, symptom);
-    } else {
-        alert("Não foi possível encontrar um diagnóstico preciso. Por favor, tente com outros sintomas ou entre em contato com um técnico.");
+        
+        // Mostrar resultado
+        resultContainer.classList.remove("hidden");
+        
+        // Adicionar ao histórico
+        try {
+            addToHistory(category, subcategory, symptom);
+        } catch (historyError) {
+            console.error("Erro ao adicionar ao histórico:", historyError);
+        }
+    } catch (error) {
+        console.error("Erro ao executar diagnóstico:", error);
+        alert("Ocorreu um erro ao processar o diagnóstico. Por favor, recarregue a página e tente novamente.");
     }
 }
 
@@ -1408,7 +1330,7 @@ function addToHistory(category, subcategory, symptom) {
     switch (category) {
         case "hardware": categoryName = "Hardware"; break;
         case "software": categoryName = "Software"; break;
-        case "network": categoryName = "Rede"; break;
+        case "rede": categoryName = "Rede"; break;
         case "performance": categoryName = "Desempenho"; break;
         case "perifericos": categoryName = "Periféricos"; break;
         case "energia": categoryName = "Energia"; break;
@@ -1519,7 +1441,7 @@ function handleQuickLinks(e) {
             `;
             break;
 
-        case "network-guide":
+        case "rede-guide":
             content = `
                 <h3>Guia Rápido de Redes</h3>
                 <p>Instruções para diagnóstico e solução de problemas comuns de rede.</p>
@@ -1642,7 +1564,7 @@ function updateKnowledgeSubcategories() {
     switch (category) {
         case "hardware":
         case "software":
-        case "network":
+        case "rede":
         case "performance":
         case "perifericos":
         case "energia":
@@ -1716,6 +1638,113 @@ function updateKnowledgeSubcategories() {
 }
 
 
+// Função para atualizar subcategorias com base na categoria selecionada
+function updateSubcategories() {
+    const category = document.getElementById("problem-category").value;
+    const subcategorySelect = document.getElementById("problem-subcategory");
+    
+    // Limpar opções atuais
+    subcategorySelect.innerHTML = "";
+    subcategorySelect.disabled = true;
+    
+    // Resetar sintomas
+    document.getElementById("symptoms").innerHTML = "";
+    document.getElementById("symptoms").disabled = true;
+    
+    if (!category) {
+        subcategorySelect.innerHTML = "<option value=''>Primeiro selecione uma categoria</option>";
+        return;
+    }
+    
+    // Adicionar nova opção padrão
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Selecione um tipo de problema";
+    subcategorySelect.appendChild(defaultOption);
+    
+    // Adicionar subcategorias com base na categoria selecionada
+    if (knowledgeBase[category]) {
+        const subcategories = Object.keys(knowledgeBase[category]);
+        
+        subcategories.forEach(subcategory => {
+            const option = document.createElement("option");
+            option.value = subcategory;
+            
+            // Formatar nome da subcategoria para exibição
+            let displayName = subcategory;
+            switch(subcategory) {
+                case "motherboard": displayName = "Placa-mãe"; break;
+                case "cpu": displayName = "Processador"; break;
+                case "memoria": displayName = "Memória RAM"; break;
+                case "armazenamento": displayName = "Disco/Armazenamento"; break;
+                case "video": displayName = "Placa de Vídeo"; break;
+                case "audio": displayName = "Áudio"; break;
+                case "sistema": displayName = "Sistema Operacional"; break;
+                case "aplicativos": displayName = "Aplicativos/Programas"; break;
+                case "malware": displayName = "Vírus/Malware"; break;
+                case "drivers": displayName = "Drivers"; break;
+                case "conexao": displayName = "Conexão com Internet"; break;
+                case "wifi": displayName = "Rede Wi-Fi"; break;
+                case "ethernet": displayName = "Conexão Ethernet"; break;
+                case "compartilhamento": displayName = "Compartilhamento de Rede"; break;
+                case "lentidao": displayName = "Lentidão"; break;
+                case "temperatura": displayName = "Temperatura"; break;
+                case "consumo": displayName = "Consumo de Recursos"; break;
+                case "teclado": displayName = "Teclado"; break;
+                case "mouse": displayName = "Mouse"; break;
+                case "impressora": displayName = "Impressora"; break;
+                case "webcam": displayName = "Webcam"; break;
+                case "fonte": displayName = "Fonte de Alimentação"; break;
+                case "bateria": displayName = "Bateria"; break;
+                case "picos": displayName = "Problemas Elétricos"; break;
+            }
+            
+            option.textContent = displayName;
+            subcategorySelect.appendChild(option);
+        });
+        
+        subcategorySelect.disabled = false;
+    }
+}
+
+
+// Função para atualizar sintomas com base na subcategoria selecionada
+function updateSymptoms() {
+    const category = document.getElementById("problem-category").value;
+    const subcategory = document.getElementById("problem-subcategory").value;
+    const symptomsSelect = document.getElementById("symptoms");
+    
+    // Limpar opções atuais
+    symptomsSelect.innerHTML = "";
+    symptomsSelect.disabled = true;
+    
+    if (!subcategory) {
+        symptomsSelect.innerHTML = "<option value=''>Primeiro selecione um tipo de problema</option>";
+        return;
+    }
+    
+    // Adicionar nova opção padrão
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Selecione os sintomas específicos";
+    symptomsSelect.appendChild(defaultOption);
+    
+    // Adicionar sintomas com base na subcategoria selecionada
+    if (knowledgeBase[category] && knowledgeBase[category][subcategory]) {
+        const symptoms = Object.keys(knowledgeBase[category][subcategory]);
+        
+        symptoms.forEach(symptom => {
+            const option = document.createElement("option");
+            option.value = symptom;
+            option.textContent = symptom.charAt(0).toUpperCase() + symptom.slice(1);
+            symptomsSelect.appendChild(option);
+        });
+        
+        symptomsSelect.disabled = false;
+    }
+}
+
+
 function showKnowledgeBase() {
     const category = document.getElementById("knowledge-category").value;
     const subcategory = document.getElementById("knowledge-subcategory").value;
@@ -1730,7 +1759,7 @@ function showKnowledgeBase() {
     knowledgeContent.innerHTML = "";
 
 
-    if (category === "hardware" || category === "software" || category === "network" || category === "performance" || category === "perifericos" || category === "energia") {
+    if (category === "hardware" || category === "software" || category === "rede" || category === "performance" || category === "perifericos" || category === "energia") {
         if (subcategory) {
 
             showProblemKnowledge(category, subcategory);
@@ -1835,7 +1864,7 @@ function showAllSubcategoriesKnowledge(category) {
     switch (category) {
         case "hardware": categoryName = "Hardware"; break;
         case "software": categoryName = "Software"; break;
-        case "network": categoryName = "Rede"; break;
+        case "rede": categoryName = "Rede"; break;
         case "performance": categoryName = "Desempenho"; break;
         case "perifericos": categoryName = "Periféricos"; break;
         case "energia": categoryName = "Energia"; break;
@@ -2024,7 +2053,7 @@ function showToolsKnowledge(toolCategory) {
     switch (toolCategory) {
         case "hardware": categoryName = "Ferramentas de Hardware"; break;
         case "software": categoryName = "Software de Diagnóstico"; break;
-        case "network": categoryName = "Ferramentas de Rede"; break;
+        case "rede": categoryName = "Ferramentas de Rede"; break;
         case "recovery": categoryName = "Recuperação de Dados"; break;
     }
 
@@ -2062,7 +2091,7 @@ function showAllToolsKnowledge() {
     const toolCategories = {
         "hardware": "Ferramentas de Hardware",
         "software": "Software de Diagnóstico",
-        "network": "Ferramentas de Rede",
+        "rede": "Ferramentas de Rede",
         "recovery": "Recuperação de Dados"
     };
 
@@ -2070,7 +2099,7 @@ function showAllToolsKnowledge() {
     const descriptions = {
         "hardware": "Ferramentas físicas para manutenção e reparo de componentes de hardware.",
         "software": "Programas para diagnóstico, monitoramento e otimização do sistema.",
-        "network": "Ferramentas para análise, diagnóstico e otimização de redes.",
+        "rede": "Ferramentas para análise, diagnóstico e otimização de redes.",
         "recovery": "Soluções para recuperação e backup de dados."
     };
 
@@ -2141,3 +2170,55 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("knowledge-category").addEventListener("change", updateKnowledgeSubcategories);
     document.getElementById("show-knowledge-btn").addEventListener("click", showKnowledgeBase);
 });
+
+
+// Função para detectar sistema operacional, navegador e resolução
+function detectSystemInfo() {
+    // Detectar Sistema Operacional
+    let osInfo = "Desconhecido";
+    const userAgent = navigator.userAgent;
+    
+    if (userAgent.indexOf("Windows NT 10.0") !== -1) osInfo = "Windows 10";
+    else if (userAgent.indexOf("Windows NT 6.3") !== -1) osInfo = "Windows 8.1";
+    else if (userAgent.indexOf("Windows NT 6.2") !== -1) osInfo = "Windows 8";
+    else if (userAgent.indexOf("Windows NT 6.1") !== -1) osInfo = "Windows 7";
+    else if (userAgent.indexOf("Mac") !== -1) osInfo = "macOS";
+    else if (userAgent.indexOf("Linux") !== -1) osInfo = "Linux";
+    else if (userAgent.indexOf("Android") !== -1) osInfo = "Android";
+    else if (userAgent.indexOf("iOS") !== -1) osInfo = "iOS";
+    
+    const osInfoElement = document.getElementById("os-info");
+    if (osInfoElement) {
+        osInfoElement.textContent = osInfo;
+    }
+    
+    // Detectar Navegador
+    let browserInfo = "Desconhecido";
+    
+    if (userAgent.indexOf("Chrome") !== -1 && userAgent.indexOf("Edg") === -1 && userAgent.indexOf("OPR") === -1) 
+        browserInfo = "Google Chrome";
+    else if (userAgent.indexOf("Firefox") !== -1) 
+        browserInfo = "Mozilla Firefox";
+    else if (userAgent.indexOf("Edg") !== -1) 
+        browserInfo = "Microsoft Edge";
+    else if (userAgent.indexOf("Safari") !== -1 && userAgent.indexOf("Chrome") === -1) 
+        browserInfo = "Safari";
+    else if (userAgent.indexOf("OPR") !== -1) 
+        browserInfo = "Opera";
+    else if (userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident") !== -1) 
+        browserInfo = "Internet Explorer";
+    
+    const browserInfoElement = document.getElementById("browser-info");
+    if (browserInfoElement) {
+        browserInfoElement.textContent = browserInfo;
+    }
+    
+    // Detectar Resolução
+    const width = window.screen.width;
+    const height = window.screen.height;
+    
+    const resolutionInfoElement = document.getElementById("resolution-info");
+    if (resolutionInfoElement) {
+        resolutionInfoElement.textContent = `${width}x${height}`;
+    }
+}
