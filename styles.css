@@ -19,7 +19,9 @@ body {
     padding: 0 15px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     color: #2c3e50;
     margin-bottom: 15px;
 }
@@ -114,7 +116,9 @@ label {
     color: #34495e;
 }
 
-select, input, textarea {
+select,
+input,
+textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -123,7 +127,9 @@ select, input, textarea {
     transition: border 0.3s ease;
 }
 
-select:focus, input:focus, textarea:focus {
+select:focus,
+input:focus,
+textarea:focus {
     border-color: #3498db;
     outline: none;
 }
@@ -149,7 +155,9 @@ button:hover {
 }
 
 /* Resultados */
-#result, #maintenance-result, #tools-result {
+#result,
+#maintenance-result,
+#tools-result {
     margin-top: 30px;
     padding: 20px;
     border-radius: 8px;
@@ -164,7 +172,9 @@ button:hover {
     color: #2c3e50;
 }
 
-#diagnosis-text, #maintenance-text, #tools-text {
+#diagnosis-text,
+#maintenance-text,
+#tools-text {
     margin-bottom: 15px;
     line-height: 1.7;
 }
@@ -174,7 +184,7 @@ button:hover {
     padding: 15px;
     background-color: #ffffff;
     border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .solution-step-title {
@@ -293,7 +303,7 @@ footer {
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .knowledge-item-title {
@@ -330,7 +340,7 @@ footer {
     margin-top: 15px;
 }
 
-.knowledge-table th, 
+.knowledge-table th,
 .knowledge-table td {
     padding: 10px;
     text-align: left;
@@ -347,10 +357,80 @@ footer {
     background-color: #f9f9f9;
 }
 
+/* Adicionar estilos para novas categorias e elementos */
+.tool-item {
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 3px solid #3498db;
+}
+
+.tool-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.tool-description {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Estilo para alertas importantes em problemas críticos */
+.warning-alert {
+    background-color: #feeeee;
+    border-left: 4px solid #e74c3c;
+    padding: 10px 15px;
+    margin: 10px 0;
+    color: #c0392b;
+    font-weight: 500;
+}
+
+/* Estilos adicionais para subcategorias específicas */
+.subcategory-hardware,
+.subcategory-software,
+.subcategory-network,
+.subcategory-performance,
+.subcategory-perifericos,
+.subcategory-energia {
+    position: relative;
+    padding-left: 5px;
+}
+
+.subcategory-hardware::before {
+    border-left: 3px solid #3498db;
+}
+
+.subcategory-software::before {
+    border-left: 3px solid #2ecc71;
+}
+
+.subcategory-network::before {
+    border-left: 3px solid #9b59b6;
+}
+
+.subcategory-performance::before {
+    border-left: 3px solid #f39c12;
+}
+
+.subcategory-perifericos::before {
+    border-left: 3px solid #1abc9c;
+}
+
+.subcategory-energia::before {
+    border-left: 3px solid #e74c3c;
+}
+
 /* Animações */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .fade-in {
@@ -362,8 +442,9 @@ footer {
     .main-content {
         flex-direction: column;
     }
-    
-    .diagnostic-panel, .info-panel {
+
+    .diagnostic-panel,
+    .info-panel {
         width: 100%;
     }
 }

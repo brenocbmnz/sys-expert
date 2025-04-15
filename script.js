@@ -1,4 +1,4 @@
-// Base de conhecimento - problemas comuns e soluções
+
 const knowledgeBase = {
     hardware: {
         motherboard: {
@@ -20,6 +20,26 @@ const knowledgeBase = {
                     "Com base no código, verifique o componente indicado (geralmente memória RAM, processador ou placa de vídeo).",
                     "Remova e recoloque o componente identificado.",
                     "Se o problema persistir, considere substituir o componente com defeito."
+                ]
+            },
+            "não reconhece dispositivos": {
+                diagnose: "A placa-mãe não está reconhecendo alguns dispositivos conectados.",
+                solution: [
+                    "Verifique se os dispositivos estão corretamente conectados aos slots/portas.",
+                    "Tente conectar o dispositivo em outra porta para descartar problema na porta específica.",
+                    "Atualize a BIOS da placa-mãe para a versão mais recente.",
+                    "Verifique se há conflitos de IRQ nas configurações da BIOS.",
+                    "Teste o dispositivo em outro computador para confirmar se o problema é na placa-mãe."
+                ]
+            },
+            "erro no boot": {
+                diagnose: "A placa-mãe apresenta erros durante o processo de inicialização.",
+                solution: [
+                    "Anote a mensagem de erro exata exibida na tela.",
+                    "Resetar as configurações da BIOS para o padrão de fábrica (clear CMOS).",
+                    "Remova temporariamente todos os dispositivos não essenciais.",
+                    "Teste com apenas um módulo de memória RAM no primeiro slot.",
+                    "Verifique se a bateria da BIOS precisa ser substituída."
                 ]
             }
         },
@@ -43,6 +63,26 @@ const knowledgeBase = {
                     "Verifique se há processos consumindo muitos recursos no Gerenciador de Tarefas.",
                     "Atualize os drivers de chipset da placa-mãe."
                 ]
+            },
+            "falhas aleatórias": {
+                diagnose: "O processador está causando travamentos ou erros aleatórios no sistema.",
+                solution: [
+                    "Verifique a temperatura do processador sob carga usando ferramentas de monitoramento.",
+                    "Execute um teste de estresse como Prime95 para verificar a estabilidade.",
+                    "Reverta qualquer overclock aplicado e teste novamente.",
+                    "Atualize a BIOS para a versão mais recente que pode conter correções para o seu CPU.",
+                    "Verifique se a fonte de alimentação está fornecendo energia estável e suficiente."
+                ]
+            },
+            "incompatibilidade": {
+                diagnose: "O processador pode ser incompatível com a placa-mãe ou outros componentes.",
+                solution: [
+                    "Verifique a lista de compatibilidade no manual da placa-mãe ou no site do fabricante.",
+                    "Confirme se a BIOS está atualizada para suportar o seu modelo de processador.",
+                    "Verifique se a fonte de alimentação atende aos requisitos de energia do processador.",
+                    "Verifique se o processador está instalado corretamente no socket, sem pinos tortos.",
+                    "Consulte fóruns específicos do fabricante para casos semelhantes ao seu."
+                ]
             }
         },
         memoria: {
@@ -65,6 +105,26 @@ const knowledgeBase = {
                     "Teste diferentes configurações de slots conforme o manual da placa-mãe.",
                     "Atualize a BIOS para a versão mais recente."
                 ]
+            },
+            "incompatibilidade": {
+                diagnose: "Os módulos de memória são incompatíveis entre si ou com a placa-mãe.",
+                solution: [
+                    "Verifique se todos os módulos têm a mesma frequência, latência e voltagem.",
+                    "Consulte a lista de memórias compatíveis no manual da placa-mãe.",
+                    "Teste os módulos individualmente para identificar qual está causando o problema.",
+                    "Atualize a BIOS da placa-mãe para melhorar a compatibilidade com memórias.",
+                    "Evite misturar módulos de diferentes fabricantes, mesmo com especificações idênticas."
+                ]
+            },
+            "lentidão extrema": {
+                diagnose: "O sistema está lento devido a problemas com a memória RAM.",
+                solution: [
+                    "Verifique a utilização da memória no Gerenciador de Tarefas.",
+                    "Feche aplicativos que estejam consumindo muita memória.",
+                    "Verifique se há um módulo com defeito executando um teste de memória.",
+                    "Confirme se as memórias estão operando na velocidade correta na BIOS.",
+                    "Considere adicionar mais memória RAM se o uso estiver consistentemente próximo do limite."
+                ]
             }
         },
         armazenamento: {
@@ -86,6 +146,110 @@ const knowledgeBase = {
                     "Execute o comando CHKDSK para verificar e reparar erros do sistema de arquivos.",
                     "Desative programas desnecessários na inicialização do Windows.",
                     "Considere atualizar para um SSD se estiver usando um HDD tradicional."
+                ]
+            },
+            "não reconhecido": {
+                diagnose: "O dispositivo de armazenamento não é reconhecido pelo sistema.",
+                solution: [
+                    "Verifique se o dispositivo está conectado corretamente (cabos de dados e energia).",
+                    "Tente usar uma porta ou cabo diferente para descartar problemas de conexão.",
+                    "Verifique se o dispositivo aparece no Gerenciador de Dispositivos ou no Disk Management.",
+                    "Para SSDs, verifique se é necessário atualizar o firmware do dispositivo.",
+                    "Em HDDs externos, verifique se o enclosure pode estar com defeito."
+                ]
+            },
+            "falhas na partição": {
+                diagnose: "O sistema não consegue acessar ou apresenta erros em uma ou mais partições.",
+                solution: [
+                    "Execute o comando 'chkdsk /f /r' no prompt de comando para verificar e reparar erros.",
+                    "Utilize ferramentas como TestDisk para recuperar partições perdidas ou corrompidas.",
+                    "Verifique se há vírus ou malware que possam estar afetando as partições.",
+                    "Faça backup dos dados acessíveis antes de qualquer tentativa mais invasiva de reparo.",
+                    "Se for disco físico, considere uma análise profissional para recuperação de dados."
+                ]
+            },
+            "arquivos corrompidos": {
+                diagnose: "Arquivos estão corrompidos ou sendo corrompidos durante o uso ou salvamento.",
+                solution: [
+                    "Execute verificação de disco com 'chkdsk /f /r' para identificar e reparar setores ruins.",
+                    "Utilize ferramentas como CrystalDiskInfo para verificar a saúde do dispositivo.",
+                    "Faça backup de todos os dados importantes imediatamente.",
+                    "Verifique se há problemas de energia que possam estar causando corrupção durante gravações.",
+                    "Se o problema persistir, substitua o dispositivo de armazenamento."
+                ]
+            }
+        },
+        video: {
+            "artefatos visuais": {
+                diagnose: "A placa de vídeo está apresentando distorções ou elementos gráficos estranhos na tela.",
+                solution: [
+                    "Verifique a temperatura da GPU durante o uso com ferramentas como MSI Afterburner.",
+                    "Atualize os drivers de vídeo para a versão mais recente (ou tente uma versão anterior estável).",
+                    "Remova overclock se aplicado e retorne a GPU às configurações de fábrica.",
+                    "Verifique se o problema ocorre em diferentes aplicações ou apenas em um jogo específico.",
+                    "Se possível, teste a placa de vídeo em outro computador para confirmar o problema."
+                ]
+            },
+            "tela preta": {
+                diagnose: "O computador liga, mas não há sinal de vídeo no monitor.",
+                solution: [
+                    "Verifique se o cabo de vídeo está conectado firmemente à placa de vídeo (não à placa-mãe se houver GPU dedicada).",
+                    "Teste com um monitor ou cabo diferentes para descartar problemas com esses componentes.",
+                    "Remova e recoloque a placa de vídeo, verificando se está bem encaixada no slot PCIe.",
+                    "Verifique se há algum sinal sonoro da placa-mãe que possa indicar um problema com a GPU.",
+                    "Teste a saída de vídeo onboard da placa-mãe (se disponível) para isolar o problema."
+                ]
+            },
+            "baixo desempenho": {
+                diagnose: "A placa de vídeo está apresentando desempenho inferior ao esperado em jogos ou aplicações gráficas.",
+                solution: [
+                    "Atualize os drivers para a versão mais recente recomendada pelo fabricante.",
+                    "Verifique se há processos em segundo plano consumindo recursos da GPU.",
+                    "Monitore a temperatura para verificar se não está ocorrendo throttling térmico.",
+                    "Verifique se as configurações de energia do Windows estão em 'Alto Desempenho'.",
+                    "Limpe os drivers atuais com DDU (Display Driver Uninstaller) e reinstale a versão mais recente."
+                ]
+            },
+            "múltiplos monitores": {
+                diagnose: "Problemas com configuração ou funcionamento de múltiplos monitores.",
+                solution: [
+                    "Verifique se todos os cabos estão corretamente conectados à placa de vídeo ou placa-mãe.",
+                    "Nas configurações de exibição do Windows, detecte e configure corretamente cada monitor.",
+                    "Verifique se os drivers de vídeo estão atualizados para suportar múltiplos monitores.",
+                    "Teste cada monitor individualmente para verificar se funcionam separadamente.",
+                    "Verifique se a placa de vídeo suporta a quantidade de monitores conectados simultaneamente."
+                ]
+            }
+        },
+        audio: {
+            "sem som": {
+                diagnose: "O computador não está reproduzindo áudio por nenhuma saída.",
+                solution: [
+                    "Verifique se o volume está ligado e não está mudo no controle do Windows e no dispositivo.",
+                    "Confirme se o dispositivo de saída correto está selecionado nas configurações de som.",
+                    "Atualize ou reinstale os drivers de áudio.",
+                    "Teste com fones de ouvido ou alto-falantes diferentes.",
+                    "Verifique se há conflitos de dispositivo no Gerenciador de Dispositivos."
+                ]
+            },
+            "ruídos estranhos": {
+                diagnose: "O áudio contém estática, chiados ou outros ruídos indesejados.",
+                solution: [
+                    "Verifique a qualidade e integridade dos cabos de áudio utilizados.",
+                    "Afaste os cabos de áudio de fontes de interferência eletromagnética (cabos de energia, etc.).",
+                    "Atualize os drivers de áudio para a versão mais recente.",
+                    "Ajuste as configurações de qualidade de áudio nas configurações do Windows.",
+                    "Verifique se o problema está na placa de som integrada ou em um dispositivo externo."
+                ]
+            },
+            "microfone não funciona": {
+                diagnose: "O sistema não está detectando ou utilizando o microfone corretamente.",
+                solution: [
+                    "Verifique se o microfone está habilitado nas configurações de privacidade do Windows.",
+                    "Confirme se o dispositivo de entrada correto está selecionado nas configurações de som.",
+                    "Teste o microfone em outro dispositivo para verificar se não é um problema de hardware.",
+                    "Atualize ou reinstale os drivers de áudio.",
+                    "Verifique se algum software está bloqueando o acesso ao microfone."
                 ]
             }
         }
@@ -111,6 +275,36 @@ const knowledgeBase = {
                     "Verifique a saúde do disco com 'chkdsk /f /r' no prompt de comando como administrador.",
                     "Considere realizar uma reinstalação limpa do Windows se o problema persistir."
                 ]
+            },
+            "congelamento frequente": {
+                diagnose: "O sistema operacional congela com frequência, exigindo reinicialização forçada.",
+                solution: [
+                    "Verifique o uso de disco, memória e CPU durante os congelamentos, se possível.",
+                    "Desative programas de inicialização e serviços não essenciais usando MSConfig.",
+                    "Execute uma verificação completa de malware com diferentes ferramentas.",
+                    "Verifique a integridade dos arquivos do sistema com 'sfc /scannow'.",
+                    "Atualize drivers de hardware, especialmente de placa de vídeo e controladores de disco."
+                ]
+            },
+            "erros de atualização": {
+                diagnose: "O sistema não consegue instalar atualizações ou apresenta erros durante o processo.",
+                solution: [
+                    "Anote o código de erro específico para pesquisa direcionada.",
+                    "Execute a Solução de Problemas de Atualização do Windows nas configurações.",
+                    "Limpe a pasta SoftwareDistribution com comandos específicos no PowerShell.",
+                    "Verifique se há espaço suficiente no disco para as atualizações.",
+                    "Em casos persistentes, considere usar a Ferramenta de Criação de Mídia para atualização."
+                ]
+            },
+            "falhas no registro": {
+                diagnose: "Erros relacionados ao registro do Windows comprometendo o funcionamento do sistema.",
+                solution: [
+                    "Execute o verificador de arquivos do sistema com 'sfc /scannow'.",
+                    "Utilize o comando 'DISM /Online /Cleanup-Image /RestoreHealth' para reparar imagem do sistema.",
+                    "Restaure o sistema para um ponto de restauração anterior ao problema.",
+                    "Use ferramentas confiáveis de limpeza e reparo de registro como CCleaner com cautela.",
+                    "Em casos graves, considere um reparo de inicialização usando a mídia de instalação do Windows."
+                ]
             }
         },
         aplicativos: {
@@ -132,6 +326,100 @@ const knowledgeBase = {
                     "Feche outras aplicações quando usar este programa específico.",
                     "Verifique se há processos em segundo plano relacionados ao aplicativo.",
                     "Contate o suporte do desenvolvedor do aplicativo para buscar soluções específicas."
+                ]
+            },
+            "incompatibilidade": {
+                diagnose: "O aplicativo apresenta problemas de compatibilidade com o sistema operacional.",
+                solution: [
+                    "Execute o aplicativo no modo de compatibilidade com versão anterior do sistema operacional.",
+                    "Verifique se há uma versão atualizada do aplicativo compatível com seu sistema.",
+                    "Consulte a documentação oficial ou site do desenvolvedor para requisitos de sistema.",
+                    "Execute o aplicativo como administrador para conceder permissões elevadas.",
+                    "Considere usar máquinas virtuais para executar aplicativos incompatíveis com seu sistema atual."
+                ]
+            },
+            "não inicia": {
+                diagnose: "O aplicativo não abre ou fecha imediatamente após tentar iniciá-lo.",
+                solution: [
+                    "Verifique logs de eventos do Windows para identificar erros específicos.",
+                    "Reinstale completamente o aplicativo, removendo arquivos residuais antes da reinstalação.",
+                    "Verifique requisitos mínimos de sistema, especialmente em jogos e aplicativos pesados.",
+                    "Desative temporariamente o antivírus para verificar se está bloqueando a execução.",
+                    "Execute uma reparação do aplicativo através do Painel de Controle ou instalador original."
+                ]
+            },
+            "erro de DLLs ausentes": {
+                diagnose: "O aplicativo não inicia devido a arquivos DLL ausentes ou corrompidos.",
+                solution: [
+                    "Identifique o nome exato da DLL ausente na mensagem de erro.",
+                    "Procure o arquivo DLL em outros diretórios do sistema e copie para a pasta do aplicativo.",
+                    "Reinstale o aplicativo para restaurar todos os arquivos necessários.",
+                    "Instale o Microsoft Visual C++ Redistributable (várias versões podem ser necessárias).",
+                    "Verifique se o DirectX está atualizado, especialmente para jogos e aplicativos multimídia."
+                ]
+            }
+        },
+        malware: {
+            "vírus detectado": {
+                diagnose: "O sistema está infectado com vírus ou outro tipo de malware.",
+                solution: [
+                    "Execute uma varredura completa com seu antivírus principal atualizado.",
+                    "Use uma segunda ferramenta especializada como Malwarebytes para verificação adicional.",
+                    "Inicie o computador em Modo Seguro para remover infecções persistentes.",
+                    "Verifique programas de inicialização suspeitos com o Gerenciador de Tarefas ou Autoruns.",
+                    "Em infecções graves, considere restaurar o sistema para um backup anterior ou reinstalar o sistema operacional."
+                ]
+            },
+            "ransomware": {
+                diagnose: "Arquivos foram criptografados por ransomware que exige pagamento para recuperação.",
+                solution: [
+                    "Desconecte imediatamente o computador da internet e redes locais para evitar propagação.",
+                    "Não pague o resgate - não há garantia de recuperação e incentiva criminosos.",
+                    "Verifique se existem ferramentas de descriptografia disponíveis para a variante específica.",
+                    "Restaure arquivos de backups externos não afetados pelo ataque.",
+                    "Reporte o ataque às autoridades competentes e busque ajuda profissional especializada."
+                ]
+            },
+            "adware": {
+                diagnose: "O sistema está infestado com adware, exibindo anúncios indesejados e redirecionamentos.",
+                solution: [
+                    "Execute ferramentas específicas contra adware como AdwCleaner.",
+                    "Verifique e desinstale programas suspeitos instalados recentemente.",
+                    "Limpe extensões de navegadores que possam conter adware.",
+                    "Restaure as configurações padrão dos navegadores afetados.",
+                    "Verifique e corrija as configurações de proxy e DNS que possam ter sido alteradas."
+                ]
+            }
+        },
+        drivers: {
+            "desatualizados": {
+                diagnose: "Drivers de dispositivos desatualizados causando instabilidade ou funcionalidade reduzida.",
+                solution: [
+                    "Identifique os dispositivos com drivers desatualizados no Gerenciador de Dispositivos.",
+                    "Visite o site do fabricante da placa-mãe/dispositivo para obter os drivers mais recentes.",
+                    "Utilize ferramentas de atualização automática de drivers com cautela.",
+                    "Para placas de vídeo, use os instaladores oficiais da NVIDIA, AMD ou Intel.",
+                    "Após atualizações, reinicie o sistema para aplicar todas as alterações."
+                ]
+            },
+            "corrompidos": {
+                diagnose: "Drivers corrompidos causando falhas de dispositivos ou crashes no sistema.",
+                solution: [
+                    "Identifique o driver problemático através do Visualizador de Eventos do Windows.",
+                    "Desinstale completamente o driver atual através do Gerenciador de Dispositivos.",
+                    "Reinicie o computador para limpar resíduos do driver anterior.",
+                    "Instale uma versão limpa do driver, preferencialmente do site do fabricante.",
+                    "Em caso de falhas contínuas, tente uma versão mais antiga e estável do driver."
+                ]
+            },
+            "conflitos": {
+                diagnose: "Conflitos entre diferentes drivers causando instabilidade no sistema.",
+                solution: [
+                    "Verifique dispositivos com símbolos de atenção no Gerenciador de Dispositivos.",
+                    "Procure por conflitos de recursos (IRQ, endereço de memória) nas propriedades do dispositivo.",
+                    "Atualize para os drivers mais recentes de todos os dispositivos envolvidos.",
+                    "Desative temporariamente dispositivos não essenciais para isolar o conflito.",
+                    "Reinstale o chipset da placa-mãe, que serve como base para outros drivers."
                 ]
             }
         }
@@ -157,6 +445,36 @@ const knowledgeBase = {
                     "Verifique se não há softwares consumindo banda em segundo plano.",
                     "Entre em contato com seu provedor de internet se o problema persistir."
                 ]
+            },
+            "sem internet": {
+                diagnose: "O dispositivo está conectado à rede, mas não tem acesso à internet.",
+                solution: [
+                    "Verifique se outros dispositivos na mesma rede conseguem acessar a internet.",
+                    "Execute o diagnóstico de rede do Windows para identificação automática de problemas.",
+                    "Verifique as configurações de IP para garantir que estejam configuradas corretamente (DHCP ou manual).",
+                    "Reinicie o modem e roteador, aguardando 30 segundos com eles desligados.",
+                    "Use o comando 'ipconfig /release' seguido de 'ipconfig /renew' para atualizar o endereço IP."
+                ]
+            },
+            "problema DNS": {
+                diagnose: "Problemas de resolução DNS impedindo acesso a websites por nome.",
+                solution: [
+                    "Tente acessar sites por IP em vez de nome de domínio para confirmar problema de DNS.",
+                    "Altere os servidores DNS para alternativas como Google (8.8.8.8) ou Cloudflare (1.1.1.1).",
+                    "Limpe o cache DNS com o comando 'ipconfig /flushdns'.",
+                    "Verifique se não há softwares de firewall ou VPN interferindo na resolução DNS.",
+                    "Desative IPv6 temporariamente se estiver usando apenas IPv4 para testar."
+                ]
+            },
+            "IP conflitante": {
+                diagnose: "Conflito de endereços IP na rede local causando desconexões intermitentes.",
+                solution: [
+                    "Verifique a mensagem de conflito de IP no Windows para identificar o endereço envolvido.",
+                    "Configure endereços IP estáticos para dispositivos críticos fora da faixa DHCP do roteador.",
+                    "Reduza o tempo de lease DHCP no roteador para liberar IPs não utilizados mais rapidamente.",
+                    "Reinicie todos os dispositivos da rede, começando pelo modem/roteador.",
+                    "Verifique se não há múltiplos servidores DHCP na mesma rede (vários roteadores)."
+                ]
             }
         },
         wifi: {
@@ -178,6 +496,90 @@ const knowledgeBase = {
                     "Reinicie o dispositivo e o roteador.",
                     "Verifique se o dispositivo é compatível com o tipo de rede (2.4GHz vs 5GHz).",
                     "Restaure as configurações de rede do dispositivo ou do roteador."
+                ]
+            },
+            "queda frequente": {
+                diagnose: "A conexão Wi-Fi cai com frequência, exigindo reconexão manual.",
+                solution: [
+                    "Atualize os drivers da placa de rede sem fio para a versão mais recente.",
+                    "Verifique nas configurações avançadas do adaptador se o modo de economia de energia está desativado.",
+                    "Altere o canal Wi-Fi no roteador para evitar interferências de redes vizinhas.",
+                    "Desative e reative a banda 2.4GHz ou 5GHz se o roteador for dual-band.",
+                    "Verifique se o firmware do roteador está atualizado."
+                ]
+            },
+            "interferência": {
+                diagnose: "Interferências físicas ou de frequência afetando a qualidade do sinal Wi-Fi.",
+                solution: [
+                    "Use aplicativos de análise Wi-Fi para identificar canais menos congestionados.",
+                    "Reposicione o roteador longe de paredes grossas, metal, espelhos e eletrodomésticos.",
+                    "Afaste o roteador de dispositivos que operem na mesma frequência (telefones sem fio, microondas).",
+                    "Mude a faixa de frequência de 2.4GHz para 5GHz se disponível (menor alcance, maior velocidade).",
+                    "Considere a instalação de repetidores Wi-Fi ou sistema mesh em ambientes maiores."
+                ]
+            }
+        },
+        ethernet: {
+            "sem conexão": {
+                diagnose: "O computador não detecta conexão via cabo Ethernet.",
+                solution: [
+                    "Verifique se o cabo está corretamente conectado em ambas as extremidades.",
+                    "Teste com outro cabo Ethernet para descartar problemas no cabo.",
+                    "Confira se as luzes da porta Ethernet no computador e no roteador estão acesas.",
+                    "Verifique no Gerenciador de Dispositivos se a placa de rede está funcionando corretamente.",
+                    "Teste a porta em outro dispositivo para verificar se o problema é na porta do roteador."
+                ]
+            },
+            "desconexões": {
+                diagnose: "A conexão Ethernet cai ou desconecta intermitentemente.",
+                solution: [
+                    "Substitua o cabo de rede por um de qualidade superior e verificado.",
+                    "Verifique se o cabo não está próximo de fontes de interferência eletromagnética.",
+                    "Atualize o driver da placa de rede para a versão mais recente.",
+                    "Desative recursos de economia de energia da placa de rede nas configurações avançadas.",
+                    "Teste com outra porta no switch/roteador para descartar problemas na porta."
+                ]
+            },
+            "velocidade reduzida": {
+                diagnose: "A conexão Ethernet está operando abaixo da velocidade esperada.",
+                solution: [
+                    "Verifique a categoria do cabo - use pelo menos Cat5e para Gigabit Ethernet.",
+                    "Confirme que a placa de rede, cabo e roteador/switch suportam a mesma velocidade máxima.",
+                    "Nas propriedades avançadas da placa de rede, force a velocidade/duplex desejada em vez de 'Auto'.",
+                    "Verifique se não há outros dispositivos consumindo a banda na mesma rede.",
+                    "Teste a velocidade conectando diretamente ao modem para isolar problemas no roteador."
+                ]
+            }
+        },
+        compartilhamento: {
+            "acesso negado": {
+                diagnose: "Não é possível acessar pastas ou arquivos compartilhados na rede.",
+                solution: [
+                    "Verifique as permissões de compartilhamento e NTFS da pasta compartilhada.",
+                    "Confirme que o usuário tem as credenciais corretas para acessar o recurso.",
+                    "Habilite a descoberta de rede e o compartilhamento de arquivos no Windows.",
+                    "Verifique se o firewall não está bloqueando o acesso ao compartilhamento.",
+                    "Certifique-se que ambos os computadores estão na mesma workgroup ou domínio."
+                ]
+            },
+            "dispositivo não visível": {
+                diagnose: "Computadores ou dispositivos não aparecem na rede local.",
+                solution: [
+                    "Habilite a descoberta de rede em todos os dispositivos.",
+                    "Verifique se o Serviço de Compartilhamento de Arquivos e Impressoras está ativo.",
+                    "Certifique-se que todos os dispositivos estão na mesma sub-rede.",
+                    "Reinicie o serviço de Estação de Trabalho e Explorador de Rede nos dispositivos Windows.",
+                    "Desative temporariamente firewalls para testar se são a causa do problema."
+                ]
+            },
+            "lentidão transferência": {
+                diagnose: "Transferência de arquivos na rede local está extremamente lenta.",
+                solution: [
+                    "Verifique a velocidade das conexões de rede em ambos os dispositivos.",
+                    "Reduza o número de transferências simultâneas de arquivos.",
+                    "Desative softwares que possam estar escaneando ou monitorando a transferência de arquivos.",
+                    "Verifique se há gargalos de hardware (HDD lento, CPU sobrecarregada) em algum dos dispositivos.",
+                    "Comprima arquivos grandes antes da transferência para reduzir o volume de dados."
                 ]
             }
         }
@@ -203,6 +605,36 @@ const knowledgeBase = {
                     "Feche aplicativos em segundo plano que possam consumir recursos.",
                     "Monitore as temperaturas durante o jogo para descartar throttling térmico."
                 ]
+            },
+            "inicialização": {
+                diagnose: "O sistema demora muito tempo para inicializar completamente.",
+                solution: [
+                    "Otimize os programas de inicialização desativando itens desnecessários no Gerenciador de Tarefas.",
+                    "Verifique se há serviços não essenciais que podem ser definidos como manuais em vez de automáticos.",
+                    "Execute uma limpeza de disco para remover arquivos temporários e desnecessários.",
+                    "Verifique se o disco de inicialização está com boa saúde e não está muito fragmentado (para HDDs).",
+                    "Considere migrar o sistema operacional para um SSD se estiver usando um HDD tradicional."
+                ]
+            },
+            "multitarefa": {
+                diagnose: "O sistema apresenta lentidão significativa ao executar múltiplas tarefas simultaneamente.",
+                solution: [
+                    "Verifique o uso de CPU, memória e disco durante a execução de múltiplas tarefas.",
+                    "Aumente a quantidade de memória RAM se o uso estiver consistentemente acima de 80%.",
+                    "Priorize aplicações importantes usando o Gerenciador de Tarefas.",
+                    "Desative efeitos visuais desnecessários do Windows para liberar recursos.",
+                    "Considere atualizar o processador se for o gargalo principal identificado."
+                ]
+            },
+            "após atualização": {
+                diagnose: "O sistema ficou visivelmente mais lento após uma atualização de software ou sistema operacional.",
+                solution: [
+                    "Verifique se todos os drivers foram atualizados para corresponder à nova versão do sistema.",
+                    "Desinstale a atualização problemática se for possível identificá-la.",
+                    "Execute a solução de problemas de desempenho do Windows.",
+                    "Verifique se há novos processos em segundo plano consumindo recursos após a atualização.",
+                    "Em casos extremos, considere fazer uma reinstalação limpa do sistema operacional."
+                ]
             }
         },
         temperatura: {
@@ -215,12 +647,282 @@ const knowledgeBase = {
                     "Melhore a ventilação do ambiente onde o computador está instalado.",
                     "Considere adicionar mais coolers ou um sistema de refrigeração mais eficiente."
                 ]
+            },
+            "throttling": {
+                diagnose: "O sistema está reduzindo o desempenho automaticamente para controlar a temperatura.",
+                solution: [
+                    "Monitore as temperaturas usando ferramentas como HWMonitor ou Core Temp.",
+                    "Melhore a ventilação do gabinete adicionando mais ventoinhas ou organizando a passagem de ar.",
+                    "Limpe os dissipadores de calor e ventoinhas, removendo poeira acumulada.",
+                    "Aplique nova pasta térmica no processador e na placa de vídeo.",
+                    "Considere soluções de refrigeração mais eficientes, como watercooling."
+                ]
+            },
+            "desligamento térmico": {
+                diagnose: "O computador desliga repentinamente devido ao superaquecimento.",
+                solution: [
+                    "Desligue o computador e deixe-o esfriar completamente antes de religá-lo.",
+                    "Verifique se todos os coolers estão funcionando corretamente.",
+                    "Limpe completamente o sistema, removendo poeira dos componentes e vias de ventilação.",
+                    "Verifique as configurações da BIOS relacionadas à temperatura e redefinir caso necessário.",
+                    "Em notebooks, considere o uso de bases refrigeradoras com ventoinhas extras."
+                ]
+            }
+        },
+        consumo: {
+            "alto uso de CPU": {
+                diagnose: "O processador está constantemente com alto uso, mesmo em repouso.",
+                solution: [
+                    "Identifique os processos consumindo CPU no Gerenciador de Tarefas (ordenar por uso de CPU).",
+                    "Verifique se há malware executando em segundo plano com uma varredura completa do sistema.",
+                    "Desative serviços e tarefas em segundo plano não essenciais.",
+                    "Verifique se o sistema de refrigeração está adequado, evitando throttling térmico.",
+                    "Atualize ou reinstale drivers de dispositivos que possam estar causando alto uso de CPU."
+                ]
+            },
+            "alto uso memória": {
+                diagnose: "O sistema está constantemente com alto uso de memória RAM.",
+                solution: [
+                    "Identifique aplicativos consumindo muita memória no Gerenciador de Tarefas.",
+                    "Feche abas de navegadores não utilizadas, especialmente em Chrome ou Firefox.",
+                    "Verifique se há vazamentos de memória em aplicativos específicos.",
+                    "Reinicie o computador periodicamente para limpar a memória.",
+                    "Considere aumentar a quantidade de RAM se o uso for legitimamente alto para suas necessidades."
+                ]
+            },
+            "alto uso disco": {
+                diagnose: "O disco rígido ou SSD está constantemente com 100% de utilização.",
+                solution: [
+                    "Identifique os processos consumindo I/O de disco no Gerenciador de Tarefas.",
+                    "Desative o serviço Windows Search e Superfetch se estiverem causando alto uso.",
+                    "Verifique a saúde do disco com CrystalDiskInfo.",
+                    "Desative a indexação de arquivos para melhorar o desempenho em discos lentos.",
+                    "Considere atualizar para um SSD se estiver usando HDD tradicional."
+                ]
+            },
+            "bateria rápida": {
+                diagnose: "A bateria do notebook está descarregando muito rapidamente.",
+                solution: [
+                    "Verifique quais aplicativos estão consumindo mais energia nas configurações de bateria.",
+                    "Reduza o brilho da tela, que é um dos maiores consumidores de energia.",
+                    "Desative conectividade sem fio (Wi-Fi, Bluetooth) quando não estiver em uso.",
+                    "Ative o modo de economia de energia no Windows.",
+                    "Verifique a saúde da bateria com o comando 'powercfg /batteryreport' no prompt de comando."
+                ]
+            }
+        }
+    },
+    perifericos: {
+        teclado: {
+            "teclas não funcionam": {
+                diagnose: "Uma ou mais teclas do teclado não respondem ao serem pressionadas.",
+                solution: [
+                    "Limpe o teclado removendo poeira e resíduos sob as teclas com ar comprimido.",
+                    "Teste o teclado em outro computador para verificar se o problema é físico.",
+                    "Reinstale ou atualize os drivers do teclado.",
+                    "Verifique se não há configurações de acessibilidade ativas que possam estar interferindo.",
+                    "Para teclados mecânicos, considere remover e limpar os switches das teclas afetadas."
+                ]
+            },
+            "teclas repetindo": {
+                diagnose: "As teclas repetem caracteres involuntariamente ao serem pressionadas.",
+                solution: [
+                    "Ajuste as configurações de repetição de teclas no Painel de Controle do Windows.",
+                    "Verifique se não há teclas fisicamente presas no teclado.",
+                    "Reinstale os drivers do teclado ou atualize para a versão mais recente.",
+                    "Teste com outro teclado para verificar se é um problema de hardware ou software.",
+                    "Se for um teclado mecânico, limpe ou substitua o switch da tecla afetada."
+                ]
+            },
+            "layout incorreto": {
+                diagnose: "O layout do teclado não corresponde às teclas físicas do dispositivo.",
+                solution: [
+                    "Verifique as configurações de idioma e teclado no Windows.",
+                    "Ajuste o layout para corresponder ao seu teclado físico (ABNT, US, etc.).",
+                    "Use a combinação Alt+Shift para alternar entre layouts configurados.",
+                    "Remova layouts de teclado não utilizados nas configurações de idioma.",
+                    "Reinicie o computador após fazer alterações nas configurações de teclado."
+                ]
+            }
+        },
+        mouse: {
+            "movimento errático": {
+                diagnose: "O ponteiro do mouse se move de forma irregular ou imprevisível.",
+                solution: [
+                    "Limpe o sensor do mouse com ar comprimido ou cotonete com álcool isopropílico.",
+                    "Troque a superfície onde o mouse é utilizado, preferindo mousepad adequado.",
+                    "Atualize ou reinstale os drivers do mouse.",
+                    "Ajuste a velocidade e a aceleração do ponteiro nas configurações do Windows.",
+                    "Teste o mouse em outro computador para verificar se é um problema de hardware."
+                ]
+            },
+            "cliques indesejados": {
+                diagnose: "O mouse executa cliques não intencionais ou duplos cliques ao clicar uma vez.",
+                solution: [
+                    "Ajuste a velocidade de duplo clique nas configurações do mouse no Windows.",
+                    "Verifique se não há pó ou sujeira nos botões que possam estar causando mau contato.",
+                    "Abra o mouse (se possível) e limpe os switches dos botões.",
+                    "Atualize ou reinstale os drivers do mouse.",
+                    "Se persistir, provavelmente é um problema mecânico no switch, considerando substituição."
+                ]
+            },
+            "sem resposta": {
+                diagnose: "O mouse não responde ou é detectado intermitentemente pelo sistema.",
+                solution: [
+                    "Verifique a conexão do cabo ou a bateria no caso de mouse sem fio.",
+                    "Tente conectar o mouse em outra porta USB.",
+                    "Para mouses sem fio, reinicie o receptor e verifique interferências.",
+                    "Reinstale os drivers do dispositivo no Gerenciador de Dispositivos.",
+                    "Teste o mouse em outro computador para confirmar se é um problema de hardware."
+                ]
+            }
+        },
+        impressora: {
+            "não imprime": {
+                diagnose: "A impressora não executa trabalhos de impressão enviados.",
+                solution: [
+                    "Verifique se a impressora está ligada, conectada e com papel e tinta/toner.",
+                    "Cancele todos os trabalhos na fila de impressão e reinicie o serviço de spooler.",
+                    "Reinicie a impressora e o computador.",
+                    "Reinstale ou atualize os drivers da impressora.",
+                    "Verifique se a impressora está definida como padrão e não está em modo offline."
+                ]
+            },
+            "qualidade ruim": {
+                diagnose: "A qualidade da impressão está abaixo do esperado, com manchas ou falhas.",
+                solution: [
+                    "Execute o utilitário de limpeza de cabeçotes através do software da impressora.",
+                    "Verifique os níveis de tinta ou toner e substitua se necessário.",
+                    "Utilize a função de alinhamento de cabeçotes no software da impressora.",
+                    "Verifique se está usando papel adequado para o tipo de impressão.",
+                    "Para impressoras a laser, limpe o tambor e outros componentes internos conforme o manual."
+                ]
+            },
+            "erro de conexão": {
+                diagnose: "O computador não consegue se comunicar com a impressora em rede ou USB.",
+                solution: [
+                    "Verifique se a impressora está ligada e corretamente conectada via cabo ou rede.",
+                    "Reinicie a impressora e o roteador (para impressoras em rede).",
+                    "Verifique se o endereço IP da impressora não mudou (para impressoras em rede).",
+                    "Reinstale os drivers da impressora usando o instalador mais recente do fabricante.",
+                    "Adicione a impressora manualmente nas configurações do Windows usando seu endereço IP."
+                ]
+            }
+        },
+        webcam: {
+            "não detectada": {
+                diagnose: "A webcam não é reconhecida pelo sistema ou pelos aplicativos.",
+                solution: [
+                    "Verifique se a webcam está corretamente conectada ou integrada.",
+                    "Confirme que a webcam não está desativada nas configurações de privacidade do Windows.",
+                    "Reinstale ou atualize os drivers da webcam.",
+                    "Verifique se há algum botão físico ou combinação de teclas que possa ter desativado a webcam.",
+                    "Teste a webcam em outro computador para verificar se é um problema de hardware."
+                ]
+            },
+            "imagem ruim": {
+                diagnose: "A imagem da webcam está com baixa qualidade, escura ou com ruídos.",
+                solution: [
+                    "Ajuste as configurações de brilho, contraste e exposição no software da webcam.",
+                    "Melhore a iluminação do ambiente, evitando contraluz.",
+                    "Limpe a lente da webcam com um pano macio e seco.",
+                    "Atualize os drivers para a versão mais recente.",
+                    "Verifique se a resolução está configurada corretamente no software que está usando a webcam."
+                ]
+            }
+        }
+    },
+    energia: {
+        fonte: {
+            "não liga": {
+                diagnose: "A fonte de alimentação não liga ou não fornece energia ao sistema.",
+                solution: [
+                    "Verifique se o cabo de energia está corretamente conectado à tomada e à fonte.",
+                    "Teste a tomada com outro dispositivo para confirmar que está funcionando.",
+                    "Verifique o botão de liga/desliga da fonte e a chave de seleção de voltagem (110V/220V).",
+                    "Se possível, teste com outra fonte de alimentação para isolar o problema.",
+                    "Inspecione visualmente a fonte em busca de componentes queimados ou inchados."
+                ]
+            },
+            "ruídos anormais": {
+                diagnose: "A fonte de alimentação está emitindo ruídos estranhos como estalos ou zumbidos.",
+                solution: [
+                    "Desligue o computador imediatamente para evitar danos a outros componentes.",
+                    "Verifique se o ventilador da fonte não está obstruído por poeira ou cabos.",
+                    "Observe se o ruído ocorre em momentos específicos (alta carga, inicialização).",
+                    "Fontes com coil whine (zumbido) sob carga podem não indicar problema grave.",
+                    "Se o ruído for de estalos ou estalidos, substitua a fonte imediatamente."
+                ]
+            },
+            "insuficiente": {
+                diagnose: "A fonte não fornece energia suficiente para todos os componentes, causando instabilidade.",
+                solution: [
+                    "Calcule o consumo total do seu sistema com todas as peças (use calculadoras online).",
+                    "Verifique se a fonte tem potência suficiente para o seu hardware atual.",
+                    "Desconecte dispositivos não essenciais para reduzir o consumo energético.",
+                    "Verifique se há picos de energia que podem estar sobrecarregando a fonte.",
+                    "Substitua por uma fonte de maior potência e boa qualidade, de preferência com certificação."
+                ]
+            }
+        },
+        bateria: {
+            "não carrega": {
+                diagnose: "A bateria do notebook não carrega quando conectada à energia.",
+                solution: [
+                    "Verifique se o carregador está conectado corretamente e a luz indicadora acende.",
+                    "Teste com outro carregador compatível, se disponível.",
+                    "Remova a bateria (se removível) e reconecte-a.",
+                    "Verifique o status de saúde da bateria com o comando 'powercfg /batteryreport'.",
+                    "No BIOS/UEFI, verifique se há opções relacionadas à bateria que possam estar desativadas."
+                ]
+            },
+            "descarrega rápido": {
+                diagnose: "A bateria do notebook descarrega muito mais rápido que o normal.",
+                solution: [
+                    "Verifique quais aplicativos estão consumindo mais energia nas configurações.",
+                    "Reduza o brilho da tela e desative recursos como Wi-Fi e Bluetooth quando não utilizados.",
+                    "Verifique a saúde da bateria com 'powercfg /batteryreport' para ver sua capacidade atual.",
+                    "Ative o modo de economia de energia do Windows.",
+                    "Baterias com mais de 2-3 anos geralmente perdem capacidade e podem precisar de substituição."
+                ]
+            },
+            "inflada": {
+                diagnose: "A bateria do notebook está inchada ou deformada.",
+                solution: [
+                    "PARE de usar a bateria imediatamente - baterias infladas são perigosas e podem causar incêndios.",
+                    "Remova a bateria do notebook com cuidado se for removível.",
+                    "Não perfure, dobre ou danifique a bateria inflada.",
+                    "Descarte a bateria em local apropriado para resíduos eletrônicos.",
+                    "Substitua por uma bateria nova e original do fabricante do notebook."
+                ]
+            }
+        },
+        picos: {
+            "desligamentos": {
+                diagnose: "O computador desliga repentinamente devido a picos ou quedas de energia.",
+                solution: [
+                    "Conecte o computador a um estabilizador ou, preferencialmente, a um nobreak (UPS).",
+                    "Verifique se a tomada e a instalação elétrica estão em boas condições.",
+                    "Reduza o número de dispositivos conectados no mesmo circuito elétrico.",
+                    "Verifique se a fonte de alimentação tem proteções contra picos e quedas de energia.",
+                    "Configure o Windows para salvar automaticamente documentos e realizar hibernação na falta de energia."
+                ]
+            },
+            "reinicia sozinho": {
+                diagnose: "O computador reinicia sozinho sem aviso, possivelmente por problemas elétricos.",
+                solution: [
+                    "Verifique os logs de eventos do Windows para identificar a causa da reinicialização.",
+                    "Desative a opção de reinicialização automática em caso de falha nas configurações avançadas do sistema.",
+                    "Teste o computador em outra tomada ou circuito elétrico.",
+                    "Utilize um nobreak (UPS) para fornecer energia estável ao sistema.",
+                    "Verifique se a fonte de alimentação está fornecendo voltagens estáveis aos componentes."
+                ]
             }
         }
     }
 };
 
-// Base de conhecimento - manutenção preventiva
+
 const maintenanceBase = {
     general: {
         new: [
@@ -316,9 +1018,9 @@ const maintenanceBase = {
     }
 };
 
-// Base de conhecimento - ferramentas recomendadas
+
 const toolsBase = {
-    hardware: [
+    Hardware: [
         {
             name: "Kit de Chaves de Precisão",
             description: "Conjunto de chaves para manutenção de hardware, com diversos tamanhos e tipos para diferentes parafusos."
@@ -340,7 +1042,7 @@ const toolsBase = {
             description: "Para aplicação entre processador e cooler, melhorando a dissipação de calor."
         }
     ],
-    software: [
+    Software: [
         {
             name: "CrystalDiskInfo",
             description: "Monitora a saúde de discos rígidos e SSDs, alertando sobre possíveis falhas."
@@ -362,7 +1064,7 @@ const toolsBase = {
             description: "Limpa arquivos temporários, registro do Windows e gerencia programas de inicialização."
         }
     ],
-    network: [
+    Rede: [
         {
             name: "Ping/Traceroute",
             description: "Ferramentas de linha de comando para diagnosticar problemas de conectividade e latência."
@@ -384,7 +1086,7 @@ const toolsBase = {
             description: "Cria mapas de cobertura Wi-Fi para identificar pontos fracos."
         }
     ],
-    recovery: [
+    Recuperação: [
         {
             name: "Recuva",
             description: "Recupera arquivos excluídos de discos rígidos, cartões de memória e pendrives."
@@ -408,12 +1110,12 @@ const toolsBase = {
     ]
 };
 
-// Função para detectar sistema operacional, navegador e resolução
+
 function detectSystemInfo() {
-    // Detectar Sistema Operacional
+
     let osInfo = "Desconhecido";
     const userAgent = navigator.userAgent;
-    
+
     if (userAgent.indexOf("Windows NT 10.0") !== -1) osInfo = "Windows 10";
     else if (userAgent.indexOf("Windows NT 6.3") !== -1) osInfo = "Windows 8.1";
     else if (userAgent.indexOf("Windows NT 6.2") !== -1) osInfo = "Windows 8";
@@ -422,148 +1124,173 @@ function detectSystemInfo() {
     else if (userAgent.indexOf("Linux") !== -1) osInfo = "Linux";
     else if (userAgent.indexOf("Android") !== -1) osInfo = "Android";
     else if (userAgent.indexOf("iOS") !== -1) osInfo = "iOS";
-    
+
     document.getElementById("os-info").textContent = osInfo;
-    
-    // Detectar Navegador
+
+
     let browserInfo = "Desconhecido";
-    
-    if (userAgent.indexOf("Chrome") !== -1 && userAgent.indexOf("Edg") === -1 && userAgent.indexOf("OPR") === -1) 
+
+    if (userAgent.indexOf("Chrome") !== -1 && userAgent.indexOf("Edg") === -1 && userAgent.indexOf("OPR") === -1)
         browserInfo = "Google Chrome";
-    else if (userAgent.indexOf("Firefox") !== -1) 
+    else if (userAgent.indexOf("Firefox") !== -1)
         browserInfo = "Mozilla Firefox";
-    else if (userAgent.indexOf("Edg") !== -1) 
+    else if (userAgent.indexOf("Edg") !== -1)
         browserInfo = "Microsoft Edge";
-    else if (userAgent.indexOf("Safari") !== -1 && userAgent.indexOf("Chrome") === -1) 
+    else if (userAgent.indexOf("Safari") !== -1 && userAgent.indexOf("Chrome") === -1)
         browserInfo = "Safari";
-    else if (userAgent.indexOf("OPR") !== -1) 
+    else if (userAgent.indexOf("OPR") !== -1)
         browserInfo = "Opera";
-    else if (userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident") !== -1) 
+    else if (userAgent.indexOf("MSIE") !== -1 || userAgent.indexOf("Trident") !== -1)
         browserInfo = "Internet Explorer";
-    
+
     document.getElementById("browser-info").textContent = browserInfo;
-    
-    // Detectar Resolução
+
+
     const width = window.screen.width;
     const height = window.screen.height;
     document.getElementById("resolution-info").textContent = `${width}x${height}`;
 }
 
-// Função para atualizar subcategorias com base na categoria selecionada
+
 function updateSubcategories() {
     const category = document.getElementById("problem-category").value;
     const subcategorySelect = document.getElementById("problem-subcategory");
-    
-    // Limpar opções atuais
+
+
     subcategorySelect.innerHTML = "";
     subcategorySelect.disabled = true;
-    
-    // Resetar sintomas
+
+
     document.getElementById("symptoms").innerHTML = "";
     document.getElementById("symptoms").disabled = true;
-    
+
     if (!category) {
         subcategorySelect.innerHTML = "<option value=''>Primeiro selecione uma categoria</option>";
         return;
     }
-    
-    // Adicionar nova opção padrão
+
+
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Selecione um tipo de problema";
     subcategorySelect.appendChild(defaultOption);
-    
-    // Adicionar subcategorias com base na categoria selecionada
+
+
     if (knowledgeBase[category]) {
         const subcategories = Object.keys(knowledgeBase[category]);
-        
+
         subcategories.forEach(subcategory => {
             const option = document.createElement("option");
             option.value = subcategory;
-            
-            // Formatar nome da subcategoria para exibição
+
+
             let displayName = subcategory;
-            switch(subcategory) {
+            switch (subcategory) {
+
                 case "motherboard": displayName = "Placa-mãe"; break;
                 case "cpu": displayName = "Processador"; break;
                 case "memoria": displayName = "Memória RAM"; break;
                 case "armazenamento": displayName = "Disco/Armazenamento"; break;
+                case "video": displayName = "Placa de Vídeo"; break;
+                case "audio": displayName = "Áudio"; break;
+
+
                 case "sistema": displayName = "Sistema Operacional"; break;
                 case "aplicativos": displayName = "Aplicativos/Programas"; break;
+                case "malware": displayName = "Vírus/Malware"; break;
+                case "drivers": displayName = "Drivers"; break;
+
+
                 case "conexao": displayName = "Conexão com Internet"; break;
                 case "wifi": displayName = "Rede Wi-Fi"; break;
+                case "ethernet": displayName = "Conexão Ethernet"; break;
+                case "compartilhamento": displayName = "Compartilhamento de Rede"; break;
+
+
                 case "lentidao": displayName = "Lentidão"; break;
                 case "temperatura": displayName = "Temperatura"; break;
+                case "consumo": displayName = "Consumo de Recursos"; break;
+
+
+                case "teclado": displayName = "Teclado"; break;
+                case "mouse": displayName = "Mouse"; break;
+                case "impressora": displayName = "Impressora"; break;
+                case "webcam": displayName = "Webcam"; break;
+
+
+                case "fonte": displayName = "Fonte de Alimentação"; break;
+                case "bateria": displayName = "Bateria"; break;
+                case "picos": displayName = "Problemas Elétricos"; break;
             }
-            
+
             option.textContent = displayName;
             subcategorySelect.appendChild(option);
         });
-        
+
         subcategorySelect.disabled = false;
     }
 }
 
-// Função para atualizar sintomas com base na subcategoria selecionada
+
 function updateSymptoms() {
     const category = document.getElementById("problem-category").value;
     const subcategory = document.getElementById("problem-subcategory").value;
     const symptomsSelect = document.getElementById("symptoms");
-    
-    // Limpar opções atuais
+
+
     symptomsSelect.innerHTML = "";
     symptomsSelect.disabled = true;
-    
+
     if (!subcategory) {
         symptomsSelect.innerHTML = "<option value=''>Primeiro selecione um tipo de problema</option>";
         return;
     }
-    
-    // Adicionar nova opção padrão
+
+
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Selecione os sintomas específicos";
     symptomsSelect.appendChild(defaultOption);
-    
-    // Adicionar sintomas com base na subcategoria selecionada
+
+
     if (knowledgeBase[category] && knowledgeBase[category][subcategory]) {
         const symptoms = Object.keys(knowledgeBase[category][subcategory]);
-        
+
         symptoms.forEach(symptom => {
             const option = document.createElement("option");
             option.value = symptom;
             option.textContent = symptom.charAt(0).toUpperCase() + symptom.slice(1);
             symptomsSelect.appendChild(option);
         });
-        
+
         symptomsSelect.disabled = false;
     }
 }
 
-// Função para realizar diagnóstico
+
 function diagnose() {
     const category = document.getElementById("problem-category").value;
     const subcategory = document.getElementById("problem-subcategory").value;
     const symptom = document.getElementById("symptoms").value;
     const additionalInfo = document.getElementById("additional-info").value;
-    
-    // Validar seleções
+
+
     if (!category || !subcategory || !symptom) {
         alert("Por favor, preencha todos os campos necessários para o diagnóstico.");
         return;
     }
-    
-    // Buscar diagnóstico na base de conhecimento
+
+
     const result = knowledgeBase[category][subcategory][symptom];
-    
+
     if (result) {
-        // Exibir resultado
+
         document.getElementById("diagnosis-text").textContent = result.diagnose;
-        
-        // Mostrar soluções passo a passo
+
+
         const solutionSteps = document.getElementById("solution-steps");
         solutionSteps.innerHTML = "<h3>Passos para Solução:</h3>";
-        
+
         result.solution.forEach((step, index) => {
             const stepDiv = document.createElement("div");
             stepDiv.className = "solution-step";
@@ -573,46 +1300,46 @@ function diagnose() {
             `;
             solutionSteps.appendChild(stepDiv);
         });
-        
-        // Mostrar resultado
+
+
         document.getElementById("result").classList.remove("hidden");
-        
-        // Adicionar ao histórico
+
+
         addToHistory(category, subcategory, symptom);
     } else {
         alert("Não foi possível encontrar um diagnóstico preciso. Por favor, tente com outros sintomas ou entre em contato com um técnico.");
     }
 }
 
-// Função para gerar plano de manutenção
+
 function generateMaintenancePlan() {
     const maintenanceType = document.getElementById("maintenance-type").value;
     const computerAge = document.getElementById("computer-age").value;
     const systemType = document.getElementById("system-type").value;
-    
-    // Validar seleções
+
+
     if (!maintenanceType || !computerAge) {
         alert("Por favor, selecione o tipo de manutenção e a idade do computador.");
         return;
     }
-    
-    // Buscar plano na base de conhecimento
+
+
     if (maintenanceBase[maintenanceType] && maintenanceBase[maintenanceType][computerAge]) {
         const maintenancePlan = maintenanceBase[maintenanceType][computerAge];
-        
-        // Exibir plano de manutenção
+
+
         let planHtml = "<ul>";
         maintenancePlan.forEach(step => {
             planHtml += `<li>${step}</li>`;
         });
         planHtml += "</ul>";
-        
-        // Adicionar recomendações específicas para o sistema operacional
+
+
         if (systemType) {
-            planHtml += "<h4>Recomendações específicas para " + 
-                (systemType === "windows" ? "Windows" : systemType === "mac" ? "macOS" : "Linux") + 
+            planHtml += "<h4>Recomendações específicas para " +
+                (systemType === "windows" ? "Windows" : systemType === "mac" ? "macOS" : "Linux") +
                 ":</h4><ul>";
-            
+
             if (systemType === "windows") {
                 planHtml += "<li>Use o Limpeza de Disco (Disk Cleanup) para remover arquivos temporários</li>";
                 planHtml += "<li>Execute o Desfragmentador de Disco regularmente (apenas para HDDs)</li>";
@@ -626,10 +1353,10 @@ function generateMaintenancePlan() {
                 planHtml += "<li>Limpe o cache com 'apt clean' ou ferramentas equivalentes</li>";
                 planHtml += "<li>Utilize ferramentas como BleachBit para limpeza do sistema</li>";
             }
-            
+
             planHtml += "</ul>";
         }
-        
+
         document.getElementById("maintenance-text").innerHTML = planHtml;
         document.getElementById("maintenance-result").classList.remove("hidden");
     } else {
@@ -637,18 +1364,18 @@ function generateMaintenancePlan() {
     }
 }
 
-// Função para mostrar ferramentas recomendadas
+
 function showRecommendedTools() {
     const toolCategory = document.getElementById("tool-category").value;
-    
+
     if (!toolCategory) {
         alert("Por favor, selecione uma categoria de ferramentas.");
         return;
     }
-    
+
     if (toolsBase[toolCategory]) {
         const tools = toolsBase[toolCategory];
-        
+
         let toolsHtml = "<div class='tools-list'>";
         tools.forEach(tool => {
             toolsHtml += `
@@ -659,7 +1386,7 @@ function showRecommendedTools() {
             `;
         });
         toolsHtml += "</div>";
-        
+
         document.getElementById("tools-text").innerHTML = toolsHtml;
         document.getElementById("tools-result").classList.remove("hidden");
     } else {
@@ -667,68 +1394,84 @@ function showRecommendedTools() {
     }
 }
 
-// Função para adicionar diagnóstico ao histórico
+
 function addToHistory(category, subcategory, symptom) {
     const history = document.getElementById("history");
-    
-    // Remover mensagem de "nenhum diagnóstico" se presente
+
+
     if (history.querySelector("p")) {
         history.innerHTML = "";
     }
-    
-    // Formatar nomes para exibição
+
+
     let categoryName, subcategoryName, symptomName;
-    
-    switch(category) {
+
+    switch (category) {
         case "hardware": categoryName = "Hardware"; break;
         case "software": categoryName = "Software"; break;
         case "network": categoryName = "Rede"; break;
         case "performance": categoryName = "Desempenho"; break;
+        case "perifericos": categoryName = "Periféricos"; break;
+        case "energia": categoryName = "Energia"; break;
         default: categoryName = category;
     }
-    
-    switch(subcategory) {
+
+    switch (subcategory) {
         case "motherboard": subcategoryName = "Placa-mãe"; break;
         case "cpu": subcategoryName = "Processador"; break;
         case "memoria": subcategoryName = "Memória RAM"; break;
         case "armazenamento": subcategoryName = "Disco/Armazenamento"; break;
+        case "video": subcategoryName = "Placa de Vídeo"; break;
+        case "audio": subcategoryName = "Áudio"; break;
         case "sistema": subcategoryName = "Sistema Operacional"; break;
         case "aplicativos": subcategoryName = "Aplicativos"; break;
+        case "malware": subcategoryName = "Vírus/Malware"; break;
+        case "drivers": subcategoryName = "Drivers"; break;
         case "conexao": subcategoryName = "Internet"; break;
         case "wifi": subcategoryName = "Wi-Fi"; break;
+        case "ethernet": subcategoryName = "Ethernet"; break;
+        case "compartilhamento": subcategoryName = "Compartilhamento"; break;
         case "lentidao": subcategoryName = "Lentidão"; break;
         case "temperatura": subcategoryName = "Temperatura"; break;
+        case "consumo": subcategoryName = "Consumo"; break;
+        case "teclado": subcategoryName = "Teclado"; break;
+        case "mouse": subcategoryName = "Mouse"; break;
+        case "impressora": subcategoryName = "Impressora"; break;
+        case "webcam": subcategoryName = "Webcam"; break;
+        case "fonte": subcategoryName = "Fonte de Alimentação"; break;
+        case "bateria": subcategoryName = "Bateria"; break;
+        case "picos": subcategoryName = "Problemas Elétricos"; break;
         default: subcategoryName = subcategory;
     }
-    
+
     symptomName = symptom.charAt(0).toUpperCase() + symptom.slice(1);
-    
-    // Criar elemento de histórico
+
+
     const historyItem = document.createElement("div");
     historyItem.className = "history-item";
-    
-    // Obter data e hora atual
+
+
     const now = new Date();
     const dateStr = now.toLocaleDateString();
     const timeStr = now.toLocaleTimeString();
-    
+
     historyItem.innerHTML = `
         <div class="history-date">${dateStr} ${timeStr}</div>
         <div class="history-problem">${categoryName} > ${subcategoryName} > ${symptomName}</div>
     `;
-    
-    // Adicionar ao início do histórico
+
+
     history.insertBefore(historyItem, history.firstChild);
 }
 
-// Função para tratar cliques nos links rápidos
+
 function handleQuickLinks(e) {
     e.preventDefault();
-    
+
     const linkId = e.target.id;
     let content = "";
-    
-    switch(linkId) {
+
+    switch (linkId) {
         case "hardware-guide":
             content = `
                 <h3>Guia Rápido de Hardware</h3>
@@ -753,7 +1496,7 @@ function handleQuickLinks(e) {
                 </ul>
             `;
             break;
-            
+
         case "software-guide":
             content = `
                 <h3>Guia Rápido de Software</h3>
@@ -776,7 +1519,7 @@ function handleQuickLinks(e) {
                 </ul>
             `;
             break;
-            
+
         case "network-guide":
             content = `
                 <h3>Guia Rápido de Redes</h3>
@@ -799,7 +1542,7 @@ function handleQuickLinks(e) {
                 </ul>
             `;
             break;
-            
+
         case "security-guide":
             content = `
                 <h3>Guia Rápido de Segurança</h3>
@@ -826,8 +1569,8 @@ function handleQuickLinks(e) {
             `;
             break;
     }
-    
-    // Criar e mostrar modal com o conteúdo
+
+
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.innerHTML = `
@@ -838,10 +1581,10 @@ function handleQuickLinks(e) {
             </div>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
-    
-    // Adicionar estilo para o modal se não existir
+
+
     if (!document.getElementById("modal-style")) {
         const style = document.createElement("style");
         style.id = "modal-style";
@@ -891,65 +1634,67 @@ function handleQuickLinks(e) {
         `;
         document.head.appendChild(style);
     }
-    
-    // Adicionar funcionalidade para fechar o modal
-    modal.querySelector(".close-modal").addEventListener("click", function() {
+
+
+    modal.querySelector(".close-modal").addEventListener("click", function () {
         document.body.removeChild(modal);
     });
-    
-    // Fechar o modal clicando fora do conteúdo
-    modal.addEventListener("click", function(event) {
+
+
+    modal.addEventListener("click", function (event) {
         if (event.target === modal) {
             document.body.removeChild(modal);
         }
     });
 }
 
-// Função para alternar entre abas
+
 function switchTab(tabId) {
-    // Esconder todos os conteúdos de abas
+
     document.querySelectorAll(".tab-content").forEach(content => {
         content.classList.remove("active");
     });
-    
-    // Remover classe ativa de todas as abas
+
+
     document.querySelectorAll(".tab").forEach(tab => {
         tab.classList.remove("active");
     });
-    
-    // Ativar aba clicada e seu conteúdo
+
+
     document.getElementById(`${tabId}-tab`).classList.add("active");
     document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add("active");
 }
 
-// Função para atualizar subcategorias da base de conhecimento
+
 function updateKnowledgeSubcategories() {
     const category = document.getElementById("knowledge-category").value;
     const subcategorySelect = document.getElementById("knowledge-subcategory");
-    
-    // Limpar opções atuais
+
+
     subcategorySelect.innerHTML = "";
     subcategorySelect.disabled = true;
-    
+
     if (!category) {
         subcategorySelect.innerHTML = "<option value=''>Primeiro selecione uma categoria</option>";
         return;
     }
-    
-    // Adicionar nova opção padrão
+
+
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Selecione uma subcategoria";
     subcategorySelect.appendChild(defaultOption);
-    
-    // Adicionar subcategorias com base na categoria selecionada
+
+
     let subcategories = [];
-    
-    switch(category) {
+
+    switch (category) {
         case "hardware":
         case "software":
         case "network":
         case "performance":
+        case "perifericos":
+        case "energia":
             subcategories = Object.keys(knowledgeBase[category]);
             break;
         case "maintenance":
@@ -959,129 +1704,161 @@ function updateKnowledgeSubcategories() {
             subcategories = Object.keys(toolsBase);
             break;
     }
-    
+
     subcategories.forEach(subcategory => {
         const option = document.createElement("option");
         option.value = subcategory;
-        
-        // Formatar nome da subcategoria para exibição
+
+
         let displayName = subcategory;
-        switch(subcategory) {
-            // Hardware
+        switch (subcategory) {
+
             case "motherboard": displayName = "Placa-mãe"; break;
             case "cpu": displayName = "Processador"; break;
             case "memoria": displayName = "Memória RAM"; break;
             case "armazenamento": displayName = "Disco/Armazenamento"; break;
-            
-            // Software
+            case "video": displayName = "Placa de Vídeo"; break;
+            case "audio": displayName = "Áudio"; break;
+
+
             case "sistema": displayName = "Sistema Operacional"; break;
             case "aplicativos": displayName = "Aplicativos/Programas"; break;
-            
-            // Network
+            case "malware": displayName = "Vírus/Malware"; break;
+            case "drivers": displayName = "Drivers"; break;
+
+
             case "conexao": displayName = "Conexão com Internet"; break;
             case "wifi": displayName = "Rede Wi-Fi"; break;
-            
-            // Performance
+            case "ethernet": displayName = "Conexão Ethernet"; break;
+            case "compartilhamento": displayName = "Compartilhamento de Rede"; break;
+
+
             case "lentidao": displayName = "Lentidão"; break;
             case "temperatura": displayName = "Temperatura"; break;
-            
-            // Maintenance
+            case "consumo": displayName = "Consumo de Recursos"; break;
+
+
+            case "teclado": displayName = "Teclado"; break;
+            case "mouse": displayName = "Mouse"; break;
+            case "impressora": displayName = "Impressora"; break;
+            case "webcam": displayName = "Webcam"; break;
+
+
+            case "fonte": displayName = "Fonte de Alimentação"; break;
+            case "bateria": displayName = "Bateria"; break;
+            case "picos": displayName = "Problemas Elétricos"; break;
+
+
             case "general": displayName = "Manutenção Geral"; break;
             case "performance": displayName = "Otimização de Desempenho"; break;
             case "security": displayName = "Segurança"; break;
             case "cleaning": displayName = "Limpeza de Hardware"; break;
-            
-            // Tools já estão formatados corretamente
+
+
         }
-        
+
         option.textContent = displayName;
         subcategorySelect.appendChild(option);
     });
-    
+
     subcategorySelect.disabled = false;
 }
 
-// Função para mostrar base de conhecimento
+
 function showKnowledgeBase() {
     const category = document.getElementById("knowledge-category").value;
     const subcategory = document.getElementById("knowledge-subcategory").value;
-    
-    // Validar seleção
+
+
     if (!category) {
         alert("Por favor, selecione pelo menos uma categoria.");
         return;
     }
-    
+
     const knowledgeContent = document.getElementById("knowledge-content");
     knowledgeContent.innerHTML = "";
-    
-    // Determinar o conteúdo a ser mostrado com base na categoria e subcategoria
-    if (category === "hardware" || category === "software" || category === "network" || category === "performance") {
+
+
+    if (category === "hardware" || category === "software" || category === "network" || category === "performance" || category === "perifericos" || category === "energia") {
         if (subcategory) {
-            // Mostrar problemas específicos da subcategoria
+
             showProblemKnowledge(category, subcategory);
         } else {
-            // Mostrar todas as subcategorias da categoria
+
             showAllSubcategoriesKnowledge(category);
         }
     } else if (category === "maintenance") {
         if (subcategory) {
-            // Mostrar planos de manutenção específicos
+
             showMaintenanceKnowledge(subcategory);
         } else {
-            // Mostrar todos os tipos de manutenção
+
             showAllMaintenanceKnowledge();
         }
     } else if (category === "tools") {
         if (subcategory) {
-            // Mostrar ferramentas específicas
+
             showToolsKnowledge(subcategory);
         } else {
-            // Mostrar todas as categorias de ferramentas
+
             showAllToolsKnowledge();
         }
     }
-    
-    // Mostrar resultado
+
+
     document.getElementById("knowledge-result").classList.remove("hidden");
 }
 
-// Função para mostrar problemas e soluções
+
 function showProblemKnowledge(category, subcategory) {
     const knowledgeContent = document.getElementById("knowledge-content");
     const data = knowledgeBase[category][subcategory];
-    
-    // Obter nome formatado da subcategoria
+
+
     let subcategoryName = subcategory;
-    switch(subcategory) {
+    switch (subcategory) {
         case "motherboard": subcategoryName = "Placa-mãe"; break;
         case "cpu": subcategoryName = "Processador"; break;
         case "memoria": subcategoryName = "Memória RAM"; break;
         case "armazenamento": subcategoryName = "Disco/Armazenamento"; break;
+        case "video": subcategoryName = "Placa de Vídeo"; break;
+        case "audio": subcategoryName = "Áudio"; break;
         case "sistema": subcategoryName = "Sistema Operacional"; break;
         case "aplicativos": subcategoryName = "Aplicativos/Programas"; break;
+        case "malware": subcategoryName = "Vírus/Malware"; break;
+        case "drivers": subcategoryName = "Drivers"; break;
         case "conexao": subcategoryName = "Conexão com Internet"; break;
         case "wifi": subcategoryName = "Rede Wi-Fi"; break;
+        case "ethernet": subcategoryName = "Conexão Ethernet"; break;
+        case "compartilhamento": subcategoryName = "Compartilhamento de Rede"; break;
         case "lentidao": subcategoryName = "Lentidão"; break;
         case "temperatura": subcategoryName = "Temperatura"; break;
+        case "consumo": subcategoryName = "Consumo de Recursos"; break;
+        case "teclado": subcategoryName = "Teclado"; break;
+        case "mouse": subcategoryName = "Mouse"; break;
+        case "impressora": subcategoryName = "Impressora"; break;
+        case "webcam": subcategoryName = "Webcam"; break;
+        case "fonte": subcategoryName = "Fonte de Alimentação"; break;
+        case "bateria": subcategoryName = "Bateria"; break;
+        case "picos": subcategoryName = "Problemas Elétricos"; break;
     }
-    
-    // Criar seção para a subcategoria
+
+
     const section = document.createElement("div");
     section.className = "knowledge-section";
     section.innerHTML = `<h3>Problemas e Soluções: ${subcategoryName}</h3>`;
-    
-    // Adicionar cada problema e solução
+
+
     for (const [symptom, details] of Object.entries(data)) {
         const item = document.createElement("div");
         item.className = "knowledge-item";
-        
+
         let stepsHtml = "<ol>";
         details.solution.forEach(step => {
             stepsHtml += `<li>${step}</li>`;
         });
         stepsHtml += "</ol>";
-        
+
         item.innerHTML = `
             <div class="knowledge-item-title">Problema: ${symptom.charAt(0).toUpperCase() + symptom.slice(1)}</div>
             <div class="knowledge-item-content">Diagnóstico: ${details.diagnose}</div>
@@ -1090,55 +1867,71 @@ function showProblemKnowledge(category, subcategory) {
                 ${stepsHtml}
             </div>
         `;
-        
+
         section.appendChild(item);
     }
-    
+
     knowledgeContent.appendChild(section);
 }
 
-// Função para mostrar todas as subcategorias de uma categoria
+
 function showAllSubcategoriesKnowledge(category) {
     const knowledgeContent = document.getElementById("knowledge-content");
     const data = knowledgeBase[category];
-    
-    // Obter nome formatado da categoria
+
+
     let categoryName;
-    switch(category) {
+    switch (category) {
         case "hardware": categoryName = "Hardware"; break;
         case "software": categoryName = "Software"; break;
         case "network": categoryName = "Rede"; break;
         case "performance": categoryName = "Desempenho"; break;
+        case "perifericos": categoryName = "Periféricos"; break;
+        case "energia": categoryName = "Energia"; break;
     }
-    
-    // Criar título principal
+
+
     const categoryTitle = document.createElement("h3");
     categoryTitle.textContent = `Base de Conhecimento: ${categoryName}`;
     knowledgeContent.appendChild(categoryTitle);
-    
-    // Processar cada subcategoria
+
+
     for (const [subcategory, problems] of Object.entries(data)) {
-        // Obter nome formatado da subcategoria
+
         let subcategoryName = subcategory;
-        switch(subcategory) {
+        switch (subcategory) {
             case "motherboard": subcategoryName = "Placa-mãe"; break;
             case "cpu": subcategoryName = "Processador"; break;
             case "memoria": subcategoryName = "Memória RAM"; break;
             case "armazenamento": subcategoryName = "Disco/Armazenamento"; break;
+            case "video": subcategoryName = "Placa de Vídeo"; break;
+            case "audio": subcategoryName = "Áudio"; break;
             case "sistema": subcategoryName = "Sistema Operacional"; break;
             case "aplicativos": subcategoryName = "Aplicativos/Programas"; break;
+            case "malware": subcategoryName = "Vírus/Malware"; break;
+            case "drivers": subcategoryName = "Drivers"; break;
             case "conexao": subcategoryName = "Conexão com Internet"; break;
             case "wifi": subcategoryName = "Rede Wi-Fi"; break;
+            case "ethernet": subcategoryName = "Conexão Ethernet"; break;
+            case "compartilhamento": subcategoryName = "Compartilhamento de Rede"; break;
             case "lentidao": subcategoryName = "Lentidão"; break;
             case "temperatura": subcategoryName = "Temperatura"; break;
+            case "consumo": subcategoryName = "Consumo de Recursos"; break;
+            case "teclado": subcategoryName = "Teclado"; break;
+            case "mouse": subcategoryName = "Mouse"; break;
+            case "impressora": subcategoryName = "Impressora"; break;
+            case "webcam": subcategoryName = "Webcam"; break;
+            case "fonte": subcategoryName = "Fonte de Alimentação"; break;
+            case "bateria": subcategoryName = "Bateria"; break;
+            case "picos": subcategoryName = "Problemas Elétricos"; break;
         }
-        
-        // Criar seção para a subcategoria
+
+
         const section = document.createElement("div");
         section.className = "knowledge-section";
         section.innerHTML = `<h3>${subcategoryName}</h3>`;
-        
-        // Criar tabela de problemas
+
+
         const table = document.createElement("table");
         table.className = "knowledge-table";
         table.innerHTML = `
@@ -1151,10 +1944,10 @@ function showAllSubcategoriesKnowledge(category) {
             <tbody>
             </tbody>
         `;
-        
+
         const tbody = table.querySelector("tbody");
-        
-        // Adicionar cada problema
+
+
         for (const [symptom, details] of Object.entries(problems)) {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -1163,48 +1956,48 @@ function showAllSubcategoriesKnowledge(category) {
             `;
             tbody.appendChild(row);
         }
-        
+
         section.appendChild(table);
         knowledgeContent.appendChild(section);
     }
 }
 
-// Função para mostrar planos de manutenção específicos
+
 function showMaintenanceKnowledge(maintenanceType) {
     const knowledgeContent = document.getElementById("knowledge-content");
     const data = maintenanceBase[maintenanceType];
-    
-    // Obter nome formatado do tipo de manutenção
+
+
     let maintenanceName;
-    switch(maintenanceType) {
+    switch (maintenanceType) {
         case "general": maintenanceName = "Manutenção Geral"; break;
         case "performance": maintenanceName = "Otimização de Desempenho"; break;
         case "security": maintenanceName = "Segurança"; break;
         case "cleaning": maintenanceName = "Limpeza de Hardware"; break;
     }
-    
-    // Criar seção para o tipo de manutenção
+
+
     const section = document.createElement("div");
     section.className = "knowledge-section";
     section.innerHTML = `<h3>Planos de Manutenção: ${maintenanceName}</h3>`;
-    
-    // Adicionar cada plano de manutenção para diferentes idades de computador
+
+
     const ageCategories = {
         "new": "Computadores Novos (menos de 1 ano)",
         "mid": "Computadores de Média Idade (1-3 anos)",
         "old": "Computadores Antigos (mais de 3 anos)"
     };
-    
+
     for (const [age, steps] of Object.entries(data)) {
         const item = document.createElement("div");
         item.className = "knowledge-item";
-        
+
         let stepsHtml = "<ol>";
         steps.forEach(step => {
             stepsHtml += `<li>${step}</li>`;
         });
         stepsHtml += "</ol>";
-        
+
         item.innerHTML = `
             <div class="knowledge-item-title">${ageCategories[age]}</div>
             <div class="knowledge-item-steps">
@@ -1212,51 +2005,51 @@ function showMaintenanceKnowledge(maintenanceType) {
                 ${stepsHtml}
             </div>
         `;
-        
+
         section.appendChild(item);
     }
-    
+
     knowledgeContent.appendChild(section);
 }
 
-// Função para mostrar todos os tipos de manutenção
+
 function showAllMaintenanceKnowledge() {
     const knowledgeContent = document.getElementById("knowledge-content");
-    
-    // Criar título principal
+
+
     const mainTitle = document.createElement("h3");
     mainTitle.textContent = "Planos de Manutenção Preventiva";
     knowledgeContent.appendChild(mainTitle);
-    
-    // Nome formatado dos tipos de manutenção
+
+
     const maintenanceTypes = {
         "general": "Manutenção Geral",
         "performance": "Otimização de Desempenho",
         "security": "Segurança",
         "cleaning": "Limpeza de Hardware"
     };
-    
-    // Criar seção para cada tipo de manutenção
+
+
     for (const [type, name] of Object.entries(maintenanceTypes)) {
         const section = document.createElement("div");
         section.className = "knowledge-section";
         section.innerHTML = `<h3>${name}</h3>`;
-        
-        // Descrições dos tipos de manutenção
+
+
         const descriptions = {
             "general": "Manutenção geral do sistema para garantir o bom funcionamento do computador.",
             "performance": "Otimizações para melhorar o desempenho e a velocidade do computador.",
             "security": "Medidas para garantir a segurança dos dados e proteger contra ameaças.",
             "cleaning": "Procedimentos de limpeza física para prolongar a vida útil do hardware."
         };
-        
-        // Adicionar descrição
+
+
         const descriptionDiv = document.createElement("div");
         descriptionDiv.className = "knowledge-item-content";
         descriptionDiv.textContent = descriptions[type];
         section.appendChild(descriptionDiv);
-        
-        // Adicionar link para ver detalhes
+
+
         const linkDiv = document.createElement("div");
         linkDiv.innerHTML = `
             <button onclick="document.getElementById('knowledge-subcategory').value='${type}'; showKnowledgeBase();" 
@@ -1265,90 +2058,90 @@ function showAllMaintenanceKnowledge() {
             </button>
         `;
         section.appendChild(linkDiv);
-        
+
         knowledgeContent.appendChild(section);
     }
 }
 
-// Função para mostrar ferramentas específicas
+
 function showToolsKnowledge(toolCategory) {
     const knowledgeContent = document.getElementById("knowledge-content");
     const tools = toolsBase[toolCategory];
-    
-    // Obter nome formatado da categoria de ferramentas
+
+
     let categoryName;
-    switch(toolCategory) {
+    switch (toolCategory) {
         case "hardware": categoryName = "Ferramentas de Hardware"; break;
         case "software": categoryName = "Software de Diagnóstico"; break;
         case "network": categoryName = "Ferramentas de Rede"; break;
         case "recovery": categoryName = "Recuperação de Dados"; break;
     }
-    
-    // Criar seção para a categoria de ferramentas
+
+
     const section = document.createElement("div");
     section.className = "knowledge-section";
     section.innerHTML = `<h3>Ferramentas Recomendadas: ${categoryName}</h3>`;
-    
-    // Adicionar cada ferramenta
+
+
     tools.forEach(tool => {
         const item = document.createElement("div");
         item.className = "knowledge-item";
-        
+
         item.innerHTML = `
             <div class="knowledge-item-title">${tool.name}</div>
             <div class="knowledge-item-content">${tool.description}</div>
         `;
-        
+
         section.appendChild(item);
     });
-    
+
     knowledgeContent.appendChild(section);
 }
 
-// Função para mostrar todas as categorias de ferramentas
+
 function showAllToolsKnowledge() {
     const knowledgeContent = document.getElementById("knowledge-content");
-    
-    // Criar título principal
+
+
     const mainTitle = document.createElement("h3");
     mainTitle.textContent = "Ferramentas Recomendadas";
     knowledgeContent.appendChild(mainTitle);
-    
-    // Nome formatado das categorias de ferramentas
+
+
     const toolCategories = {
         "hardware": "Ferramentas de Hardware",
         "software": "Software de Diagnóstico",
         "network": "Ferramentas de Rede",
         "recovery": "Recuperação de Dados"
     };
-    
-    // Descrições das categorias
+
+
     const descriptions = {
         "hardware": "Ferramentas físicas para manutenção e reparo de componentes de hardware.",
         "software": "Programas para diagnóstico, monitoramento e otimização do sistema.",
         "network": "Ferramentas para análise, diagnóstico e otimização de redes.",
         "recovery": "Soluções para recuperação e backup de dados."
     };
-    
-    // Criar seção para cada categoria de ferramentas
+
+
     for (const [category, name] of Object.entries(toolCategories)) {
         const section = document.createElement("div");
         section.className = "knowledge-section";
         section.innerHTML = `<h3>${name}</h3>`;
-        
-        // Adicionar descrição
+
+
         const descriptionDiv = document.createElement("div");
         descriptionDiv.className = "knowledge-item-content";
         descriptionDiv.textContent = descriptions[category];
         section.appendChild(descriptionDiv);
-        
-        // Adicionar exemplos de ferramentas
+
+
         const examplesDiv = document.createElement("div");
         examplesDiv.className = "knowledge-item-content";
         examplesDiv.innerHTML = `<strong>Exemplos:</strong> ${toolsBase[category].map(tool => tool.name).slice(0, 3).join(", ")} e outras.`;
         section.appendChild(examplesDiv);
-        
-        // Adicionar link para ver detalhes
+
+
         const linkDiv = document.createElement("div");
         linkDiv.innerHTML = `
             <button onclick="document.getElementById('knowledge-subcategory').value='${category}'; showKnowledgeBase();" 
@@ -1357,43 +2150,43 @@ function showAllToolsKnowledge() {
             </button>
         `;
         section.appendChild(linkDiv);
-        
+
         knowledgeContent.appendChild(section);
     }
 }
 
-// Anexar manipuladores de eventos quando o documento estiver pronto
-document.addEventListener("DOMContentLoaded", function() {
-    // Detectar informações do sistema
+
+document.addEventListener("DOMContentLoaded", function () {
+
     detectSystemInfo();
-    
-    // Manipuladores para seleção de categoria e subcategoria
+
+
     document.getElementById("problem-category").addEventListener("change", updateSubcategories);
     document.getElementById("problem-subcategory").addEventListener("change", updateSymptoms);
-    
-    // Manipulador para botão de diagnóstico
+
+
     document.getElementById("diagnose-btn").addEventListener("click", diagnose);
-    
-    // Manipulador para botão de manutenção
+
+
     document.getElementById("maintenance-btn").addEventListener("click", generateMaintenancePlan);
-    
-    // Manipulador para botão de ferramentas
+
+
     document.getElementById("tools-btn").addEventListener("click", showRecommendedTools);
-    
-    // Manipuladores para links rápidos
+
+
     document.querySelectorAll(".quick-links a").forEach(link => {
         link.addEventListener("click", handleQuickLinks);
     });
-    
-    // Manipuladores para abas
+
+
     document.querySelectorAll(".tab").forEach(tab => {
-        tab.addEventListener("click", function() {
+        tab.addEventListener("click", function () {
             const tabId = this.getAttribute("data-tab");
             switchTab(tabId);
         });
     });
-    
-    // Manipuladores para a Base de Conhecimento
+
+
     document.getElementById("knowledge-category").addEventListener("change", updateKnowledgeSubcategories);
     document.getElementById("show-knowledge-btn").addEventListener("click", showKnowledgeBase);
 });
