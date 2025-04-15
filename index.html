@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Especialista de Manutenção de Computadores</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Sistema Especialista de Manutenção de Computadores</h1>
+            <p>Diagnóstico e solução de problemas em hardware e software</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="diagnostic-panel">
+                <div class="tabs">
+                    <div class="tab active" data-tab="diagnostic">Diagnóstico</div>
+                    <div class="tab" data-tab="maintenance">Manutenção Preventiva</div>
+                    <div class="tab" data-tab="tools">Ferramentas</div>
+                    <div class="tab" data-tab="knowledge">Base de Conhecimento</div>
+                </div>
+                
+                <div class="tab-content active" id="diagnostic-tab">
+                    <h2>Diagnóstico de Problemas</h2>
+                    
+                    <div class="form-group">
+                        <label for="problem-category">Categoria do Problema:</label>
+                        <select id="problem-category">
+                            <option value="">Selecione uma categoria</option>
+                            <option value="hardware">Hardware</option>
+                            <option value="software">Software</option>
+                            <option value="network">Rede</option>
+                            <option value="performance">Desempenho</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="subcategory-container">
+                        <label for="problem-subcategory">Tipo de Problema:</label>
+                        <select id="problem-subcategory" disabled>
+                            <option value="">Primeiro selecione uma categoria</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="symptoms-container">
+                        <label for="symptoms">Sintomas Específicos:</label>
+                        <select id="symptoms" disabled>
+                            <option value="">Primeiro selecione um tipo de problema</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additional-info">Informações Adicionais (opcional):</label>
+                        <input type="text" id="additional-info" placeholder="Ex: Modelo do computador, quando começou, etc.">
+                    </div>
+                    
+                    <button id="diagnose-btn">Diagnosticar Problema</button>
+                    
+                    <div id="result" class="hidden">
+                        <div class="result-title">Resultado do Diagnóstico:</div>
+                        <div id="diagnosis-text"></div>
+                        
+                        <div id="solution-steps" class="fade-in"></div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="maintenance-tab">
+                    <h2>Manutenção Preventiva</h2>
+                    
+                    <div class="form-group">
+                        <label for="maintenance-type">Tipo de Manutenção:</label>
+                        <select id="maintenance-type">
+                            <option value="">Selecione um tipo</option>
+                            <option value="general">Manutenção Geral</option>
+                            <option value="performance">Otimização de Desempenho</option>
+                            <option value="security">Segurança</option>
+                            <option value="cleaning">Limpeza de Hardware</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="computer-age">Idade do Computador:</label>
+                        <select id="computer-age">
+                            <option value="">Selecione</option>
+                            <option value="new">Menos de 1 ano</option>
+                            <option value="mid">1-3 anos</option>
+                            <option value="old">Mais de 3 anos</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="system-type">Sistema Operacional:</label>
+                        <select id="system-type">
+                            <option value="">Selecione</option>
+                            <option value="windows">Windows</option>
+                            <option value="mac">macOS</option>
+                            <option value="linux">Linux</option>
+                        </select>
+                    </div>
+                    
+                    <button id="maintenance-btn">Gerar Plano de Manutenção</button>
+                    
+                    <div id="maintenance-result" class="hidden">
+                        <div class="result-title">Plano de Manutenção Recomendado:</div>
+                        <div id="maintenance-text"></div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="tools-tab">
+                    <h2>Ferramentas Recomendadas</h2>
+                    
+                    <div class="form-group">
+                        <label for="tool-category">Categoria:</label>
+                        <select id="tool-category">
+                            <option value="">Selecione uma categoria</option>
+                            <option value="hardware">Ferramentas de Hardware</option>
+                            <option value="software">Software de Diagnóstico</option>
+                            <option value="network">Ferramentas de Rede</option>
+                            <option value="recovery">Recuperação de Dados</option>
+                        </select>
+                    </div>
+                    
+                    <button id="tools-btn">Mostrar Ferramentas Recomendadas</button>
+                    
+                    <div id="tools-result" class="hidden">
+                        <div class="result-title">Ferramentas Recomendadas:</div>
+                        <div id="tools-text"></div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="knowledge-tab">
+                    <h2>Base de Conhecimento</h2>
+                    
+                    <div class="form-group">
+                        <label for="knowledge-category">Categoria:</label>
+                        <select id="knowledge-category">
+                            <option value="">Selecione uma categoria</option>
+                            <option value="hardware">Hardware</option>
+                            <option value="software">Software</option>
+                            <option value="network">Rede</option>
+                            <option value="performance">Desempenho</option>
+                            <option value="maintenance">Manutenção</option>
+                            <option value="tools">Ferramentas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="knowledge-subcategory-container">
+                        <label for="knowledge-subcategory">Subcategoria:</label>
+                        <select id="knowledge-subcategory" disabled>
+                            <option value="">Primeiro selecione uma categoria</option>
+                        </select>
+                    </div>
+                    
+                    <button id="show-knowledge-btn">Mostrar Base de Conhecimento</button>
+                    
+                    <div id="knowledge-result" class="hidden">
+                        <div class="result-title">Conhecimentos Disponíveis:</div>
+                        <div id="knowledge-content"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-panel">
+                <h2>Informações do Sistema</h2>
+                <div class="system-info" id="system-info">
+                    <div class="info-item">
+                        <span class="info-label">Sistema Operacional:</span>
+                        <span id="os-info">Detectando...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Navegador:</span>
+                        <span id="browser-info">Detectando...</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Resolução de Tela:</span>
+                        <span id="resolution-info">Detectando...</span>
+                    </div>
+                </div>
+                
+                <h2>Histórico de Diagnósticos</h2>
+                <div id="history" class="history-list">
+                    <p>Nenhum diagnóstico realizado ainda.</p>
+                </div>
+                
+                <h2>Links Rápidos</h2>
+                <div class="quick-links">
+                    <a href="#" id="hardware-guide">Guia de Hardware</a>
+                    <a href="#" id="software-guide">Guia de Software</a>
+                    <a href="#" id="network-guide">Guia de Redes</a>
+                    <a href="#" id="security-guide">Guia de Segurança</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Sistema Especialista de Manutenção de Computadores &copy; 2025</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
