@@ -270,7 +270,7 @@ const knowledgeBase = {
                 solution: [
                     "Otimize os programas de inicialização usando o Gerenciador de Tarefas (aba Inicialização).",
                     "Desinstale programas não utilizados que possam estar consumindo recursos.",
-                    "Execute uma varredura completa de malware com Windows Defender ou outro antivírus.",
+                    "Execute uma varre  dura completa de malware com Windows Defender ou outro antivírus.",
                     "Verifique a saúde do disco com 'chkdsk /f /r' no prompt de comando como administrador.",
                     "Considere realizar uma reinstalação limpa do Windows se o problema persistir."
                 ]
@@ -1110,6 +1110,24 @@ const toolsBase = {
 };
 
 
+
+function mapCategoryToKnowledgeBase(category) {
+    const categoryMap = {
+        "hardware": "hardware",
+        "software": "software",
+        "network": "rede",
+        "performance": "performance",
+        "perifericos": "perifericos",
+        "energia": "energia",
+        "seguranca": "seguranca",
+        "manutencao": "manutencao",
+        "dispositivos_especificos": "dispositivos_especificos"
+    };
+    
+    return categoryMap[category] || category;
+}
+
+
 function diagnose() {
     try {
         const category = document.getElementById("problem-category")?.value;
@@ -1122,25 +1140,27 @@ function diagnose() {
             return;
         }
         
-        if (!knowledgeBase[category]) {
-            console.error(`Categoria '${category}' não encontrada na base de conhecimento.`);
+        const knowledgeBaseCategory = mapCategoryToKnowledgeBase(category);
+        
+        if (!knowledgeBase[knowledgeBaseCategory]) {
+            console.error(`Categoria '${knowledgeBaseCategory}' não encontrada na base de conhecimento.`);
             alert("Erro: Categoria não encontrada na base de conhecimento.");
             return;
         }
         
-        if (!knowledgeBase[category][subcategory]) {
-            console.error(`Subcategoria '${subcategory}' não encontrada na categoria '${category}'.`);
+        if (!knowledgeBase[knowledgeBaseCategory][subcategory]) {
+            console.error(`Subcategoria '${subcategory}' não encontrada na categoria '${knowledgeBaseCategory}'.`);
             alert("Erro: Tipo de problema não encontrado na base de conhecimento.");
             return;
         }
         
-        if (!knowledgeBase[category][subcategory][symptom]) {
+        if (!knowledgeBase[knowledgeBaseCategory][subcategory][symptom]) {
             console.error(`Sintoma '${symptom}' não encontrado na subcategoria '${subcategory}'.`);
             alert("Erro: Sintoma não encontrado na base de conhecimento.");
             return;
         }
         
-        const result = knowledgeBase[category][subcategory][symptom];
+        const result = knowledgeBase[knowledgeBaseCategory][subcategory][symptom];
         
         let resultContainer = document.getElementById("result");
         if (!resultContainer) {
@@ -1532,105 +1552,103 @@ function switchTab(tabId) {
 function updateKnowledgeSubcategories() {
     const category = document.getElementById("knowledge-category").value;
     const subcategorySelect = document.getElementById("knowledge-subcategory");
-
-
+    
+    console.log(`Base de Conhecimento - Categoria selecionada: "${category}"`);
+    
     subcategorySelect.innerHTML = "";
     subcategorySelect.disabled = true;
-
+    
     if (!category) {
         subcategorySelect.innerHTML = "<option value=''>Primeiro selecione uma categoria</option>";
         return;
     }
-
-
+    
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Selecione uma subcategoria";
     subcategorySelect.appendChild(defaultOption);
-
-
-    let subcategories = [];
-
-    switch (category) {
-        case "hardware":
-        case "software":
-        case "rede":
-        case "performance":
-        case "perifericos":
-        case "energia":
-            subcategories = Object.keys(knowledgeBase[category]);
-            break;
-        case "maintenance":
-            subcategories = Object.keys(maintenanceBase);
-            break;
-        case "tools":
-            subcategories = Object.keys(toolsBase);
-            break;
+    
+        const knowledgeBaseCategory = mapCategoryToKnowledgeBase(category);
+    console.log(`Base de Conhecimento - Categoria mapeada: "${knowledgeBaseCategory}"`);
+    
+    if (knowledgeBase[knowledgeBaseCategory]) {
+        console.log(`Base de Conhecimento - Encontrou categoria "${knowledgeBaseCategory}" na base de conhecimento`);
+        const subcategories = Object.keys(knowledgeBase[knowledgeBaseCategory]);
+        console.log(`Base de Conhecimento - Subcategorias encontradas: ${subcategories}`);
+        
+        subcategories.forEach(subcategory => {
+            const option = document.createElement("option");
+            option.value = subcategory;
+            
+            let displayName = subcategory;
+            switch(subcategory) {
+                case "motherboard": displayName = "Placa-mãe"; break;
+                case "cpu": displayName = "Processador"; break;
+                case "memoria": displayName = "Memória RAM"; break;
+                case "armazenamento": displayName = "Disco/Armazenamento"; break;
+                case "video": displayName = "Placa de Vídeo"; break;
+                case "audio": displayName = "Áudio"; break;
+                case "rede": displayName = "Hardware de Rede"; break;
+                case "usb": displayName = "Portas USB"; break;
+                
+                case "sistema": displayName = "Sistema Operacional"; break;
+                case "aplicativos": displayName = "Aplicativos/Programas"; break;
+                case "malware": displayName = "Vírus/Malware"; break;
+                case "drivers": displayName = "Drivers"; break;
+                case "atualizacoes": displayName = "Atualizações"; break;
+                
+                case "conexao": displayName = "Conexão com Internet"; break;
+                case "wifi": displayName = "Rede Wi-Fi"; break;
+                case "ethernet": displayName = "Conexão Ethernet"; break;
+                case "compartilhamento": displayName = "Compartilhamento de Rede"; break;
+                case "conectividade": displayName = "Problemas de Conectividade"; break;
+                
+                case "lentidao": displayName = "Lentidão"; break;
+                case "temperatura": displayName = "Temperatura"; break;
+                case "consumo": displayName = "Consumo de Recursos"; break;
+                
+                case "teclado": displayName = "Teclado"; break;
+                case "mouse": displayName = "Mouse"; break;
+                case "impressora": displayName = "Impressora"; break;
+                case "webcam": displayName = "Webcam"; break;
+                case "monitor": displayName = "Monitor"; break;
+                
+                case "fonte": displayName = "Fonte de Alimentação"; break;
+                case "bateria": displayName = "Bateria"; break;
+                case "picos": displayName = "Problemas Elétricos"; break;
+                case "nobreak": displayName = "No-break/UPS"; break;
+                
+                case "virus": displayName = "Vírus e Malware"; break;
+                case "privacidade": displayName = "Privacidade"; break;
+                case "ransomware": displayName = "Ransomware"; break;
+                
+                case "preventiva": displayName = "Manutenção Preventiva"; break;
+                case "backup": displayName = "Backup e Recuperação"; break;
+                
+                case "notebook": displayName = "Notebooks"; break;
+                case "allinone": displayName = "Computadores All-in-One"; break;
+            }
+            
+            option.textContent = displayName;
+            subcategorySelect.appendChild(option);
+        });
+        
+        subcategorySelect.disabled = false;
+    } else {
+        console.log(`Base de Conhecimento - ERRO: Categoria "${knowledgeBaseCategory}" não encontrada na base de conhecimento`);
+        console.log(`Base de Conhecimento - Chaves disponíveis: ${Object.keys(knowledgeBase)}`);
     }
-
-    subcategories.forEach(subcategory => {
-        const option = document.createElement("option");
-        option.value = subcategory;
-
-
-        let displayName = subcategory;
-        switch (subcategory) {
-
-            case "motherboard": displayName = "Placa-mãe"; break;
-            case "cpu": displayName = "Processador"; break;
-            case "memoria": displayName = "Memória RAM"; break;
-            case "armazenamento": displayName = "Disco/Armazenamento"; break;
-            case "video": displayName = "Placa de Vídeo"; break;
-            case "audio": displayName = "Áudio"; break;
-
-
-            case "sistema": displayName = "Sistema Operacional"; break;
-            case "aplicativos": displayName = "Aplicativos/Programas"; break;
-            case "malware": displayName = "Vírus/Malware"; break;
-            case "drivers": displayName = "Drivers"; break;
-
-
-            case "conexao": displayName = "Conexão com Internet"; break;
-            case "wifi": displayName = "Rede Wi-Fi"; break;
-            case "ethernet": displayName = "Conexão Ethernet"; break;
-            case "compartilhamento": displayName = "Compartilhamento de Rede"; break;
-
-
-            case "lentidao": displayName = "Lentidão"; break;
-            case "temperatura": displayName = "Temperatura"; break;
-            case "consumo": displayName = "Consumo de Recursos"; break;
-
-
-            case "teclado": displayName = "Teclado"; break;
-            case "mouse": displayName = "Mouse"; break;
-            case "impressora": displayName = "Impressora"; break;
-            case "webcam": displayName = "Webcam"; break;
-
-
-            case "fonte": displayName = "Fonte de Alimentação"; break;
-            case "bateria": displayName = "Bateria"; break;
-            case "picos": displayName = "Problemas Elétricos"; break;
-
-
-            case "general": displayName = "Manutenção Geral"; break;
-            case "performance": displayName = "Otimização de Desempenho"; break;
-            case "security": displayName = "Segurança"; break;
-            case "cleaning": displayName = "Limpeza de Hardware"; break;
-
-
-        }
-
-        option.textContent = displayName;
-        subcategorySelect.appendChild(option);
-    });
-
-    subcategorySelect.disabled = false;
 }
 
 
 function updateSubcategories() {
     const category = document.getElementById("problem-category").value;
     const subcategorySelect = document.getElementById("problem-subcategory");
+    
+    console.log(`Categoria selecionada: "${category}"`);
+    
+    subcategorySelect.innerHTML = "";
+    subcategorySelect.disabled = true;
     
     subcategorySelect.innerHTML = "";
     subcategorySelect.disabled = true;
@@ -1648,8 +1666,13 @@ function updateSubcategories() {
     defaultOption.textContent = "Selecione um tipo de problema";
     subcategorySelect.appendChild(defaultOption);
     
-    if (knowledgeBase[category]) {
-        const subcategories = Object.keys(knowledgeBase[category]);
+    const knowledgeBaseCategory = mapCategoryToKnowledgeBase(category);
+    console.log(`Categoria mapeada para a base de conhecimento: "${knowledgeBaseCategory}"`);
+    
+    if (knowledgeBase[knowledgeBaseCategory]) {
+        console.log(`Encontrou categoria "${knowledgeBaseCategory}" na base de conhecimento`);
+        const subcategories = Object.keys(knowledgeBase[knowledgeBaseCategory]);
+        console.log(`Subcategorias encontradas: ${subcategories}`);
         
         subcategories.forEach(subcategory => {
             const option = document.createElement("option");
@@ -1688,6 +1711,9 @@ function updateSubcategories() {
         });
         
         subcategorySelect.disabled = false;
+    } else {
+        console.log(`ERRO: Categoria "${knowledgeBaseCategory}" não encontrada na base de conhecimento`);
+        console.log(`Chaves disponíveis: ${Object.keys(knowledgeBase)}`);
     }
 }
 
@@ -1710,8 +1736,10 @@ function updateSymptoms() {
     defaultOption.textContent = "Selecione os sintomas específicos";
     symptomsSelect.appendChild(defaultOption);
     
-    if (knowledgeBase[category] && knowledgeBase[category][subcategory]) {
-        const symptoms = Object.keys(knowledgeBase[category][subcategory]);
+    const knowledgeBaseCategory = mapCategoryToKnowledgeBase(category);
+    
+    if (knowledgeBase[knowledgeBaseCategory] && knowledgeBase[knowledgeBaseCategory][subcategory]) {
+        const symptoms = Object.keys(knowledgeBase[knowledgeBaseCategory][subcategory]);
         
         symptoms.forEach(symptom => {
             const option = document.createElement("option");
